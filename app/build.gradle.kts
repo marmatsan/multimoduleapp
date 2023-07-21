@@ -1,11 +1,5 @@
 android {
 
-    defaultConfig {
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-    }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -14,14 +8,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.8"
     }
 
     packagingOptions {

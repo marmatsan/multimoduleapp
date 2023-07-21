@@ -1,11 +1,12 @@
 plugins {
-    id("com.android.application") version "7.4.1" apply false
-    id("com.android.library") version "7.4.1" apply false
-    id("org.jetbrains.kotlin.android") version "1.8.22" apply false
-    id("com.google.dagger.hilt.android") version "2.47" apply false
-    id("org.jetbrains.kotlin.kapt") version "1.8.22" apply false
+    `version-catalog`
+    alias(plugins.plugins.com.android.application) apply false
+    alias(plugins.plugins.com.android.library) apply false
+    alias(plugins.plugins.org.jetbrains.kotlin.android) apply false
+    alias(plugins.plugins.com.google.dagger.hilt.android) apply false
+    alias(plugins.plugins.org.jetbrains.kotlin.kapt) apply false
 
-    /* Custom plugins */
+    /* Custom project plugins */
     id("com.marmatsan.android") apply false
     id("com.marmatsan.compose") apply false
 }

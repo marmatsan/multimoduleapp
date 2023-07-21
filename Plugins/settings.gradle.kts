@@ -1,5 +1,6 @@
 rootProject.name = "Plugins"
 include(
     "android",
-    "compose"
+    "compose",
+    "dependencies"
 )

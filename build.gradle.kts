@@ -6,7 +6,7 @@ plugins {
     alias(plugins.plugins.com.google.dagger.hilt.android) apply false
     alias(plugins.plugins.org.jetbrains.kotlin.kapt) apply false
 
-    /* Custom project plugins */
+    //* Custom project plugins *//*
     id("com.marmatsan.android") apply false
     id("com.marmatsan.compose") apply false
 }
@@ -16,5 +16,9 @@ subprojects {
         apply(plugin = "com.android.application")
         apply(plugin = "com.marmatsan.android")
         apply(plugin = "com.marmatsan.compose")
+    } else {
+        apply(plugin = "com.android.library")
+        apply(plugin = "com.marmatsan.android")
     }
 }
+

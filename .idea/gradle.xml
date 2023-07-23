@@ -11,6 +11,8 @@
                 <projects>
                   <project path="$PROJECT_DIR$/Plugins" />
                   <project path="$PROJECT_DIR$/Plugins/android" />
+                  <project path="$PROJECT_DIR$/Plugins/compose" />
+                  <project path="$PROJECT_DIR$/Plugins/dependencies" />
                 </projects>
               </build>
             </builds>
@@ -22,7 +24,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Plugins" />
             <option value="$PROJECT_DIR$/Plugins/android" />
+            <option value="$PROJECT_DIR$/Plugins/compose" />
+            <option value="$PROJECT_DIR$/Plugins/dependencies" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
           </set>
         </option>
       </GradleProjectSettings>

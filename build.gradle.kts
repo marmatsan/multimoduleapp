@@ -21,6 +21,7 @@ subprojects {
     } else {
         apply(plugin = "com.android.library")
         apply(plugin = "com.marmatsan.android")
+        //Apply only gradle plugin when the module uses compose: apply(plugin = "com.marmatsan.compose")
     }
 }
 

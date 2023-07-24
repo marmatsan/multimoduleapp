@@ -6,6 +6,50 @@ import org.gradle.api.initialization.resolve.DependencyResolutionManagement
 
 class Dependencies : Plugin<Settings> {
 
+    companion object Env {
+
+        object Modules {
+
+            object Names {
+                // app
+                const val app = "app"
+
+                // core
+                const val core = "core"
+
+                // onboarding
+                const val onboarding = "onboarding"
+                const val onboardingDomain = "${onboarding}_domain"
+                const val onboardingUi = "${onboarding}_ui"
+
+                // tracker
+                const val tracker = "tracker"
+                const val trackerData = "${tracker}_data"
+                const val trackerDomain = "${tracker}_domain"
+                const val trackerUi = "${tracker}_ui"
+            }
+
+            object Identifiers {
+                // app
+                const val app = ":${Names.app}"
+
+                // core
+                const val core = ":${Names.core}"
+
+                // onboarding
+                val onboardingDomain = ":${Names.onboarding}:${Names.onboardingDomain}"
+                val onboardingUi = ":${Names.onboarding}:${Names.onboardingUi}"
+
+                // tracker
+                val trackerData = ":${Names.tracker}:${Names.trackerData}"
+                val trackerDomain = ":${Names.tracker}:${Names.trackerDomain}"
+                val trackerUi = ":${Names.tracker}:${Names.trackerUi}"
+            }
+
+        }
+
+    }
+
     override fun apply(settings: Settings) {
         settings.dependencyResolutionManagement {
             versionCatalogsBuilder(
@@ -60,7 +104,10 @@ class Dependencies : Plugin<Settings> {
                     catalog.dependencies.forEach { dependency ->
                         when (dependency) {
                             is PluginDep -> {
-                                plugin(dependency.name, dependency.group).version(dependency.version)
+                                plugin(
+                                    dependency.name,
+                                    dependency.group
+                                ).version(dependency.version)
                             }
 
                             is LibraryDep -> {

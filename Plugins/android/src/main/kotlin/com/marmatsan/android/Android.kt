@@ -43,6 +43,7 @@ class Android : Plugin<Project> {
                 }
 
                 testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
             }
 
         }

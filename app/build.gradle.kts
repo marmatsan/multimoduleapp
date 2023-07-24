@@ -1,3 +1,5 @@
+import com.marmatsan.dependencies.Dependencies.Env
+
 android {
 
     buildTypes {
@@ -20,11 +22,27 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation("androidx.compose.ui:ui:1.4.3")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
-    implementation("androidx.compose.material3:material3:1.1.1")
+    /* Modules */
+    // Core
+    implementation(project(Env.Modules.Identifiers.core))
+    // Onboarding
+    implementation(project(Env.Modules.Identifiers.onboardingDomain))
+    implementation(project(Env.Modules.Identifiers.onboardingUi))
+    //Tracker
+    implementation(project(Env.Modules.Identifiers.trackerData))
+    implementation(project(Env.Modules.Identifiers.trackerDomain))
+    implementation(project(Env.Modules.Identifiers.trackerUi))
+
+    /* Libraries */
+    // Core
+    implementation(libs.androidx.core)
+    // Lifecycle
+    implementation(libs.bundles.androidx.lifecycle)
+    // Activity Compose
+    implementation(libs.androidx.activity)
+    // Compose
+    implementation(libs.bundles.androidx.compose.ui)
+    // Material 3
+    implementation(libs.androidx.compose.material3)
 
 }

@@ -43,16 +43,17 @@ open class LibraryDep(
             artifacts = listOf(
                 "activity-compose"
             ),
-            version = "1.6.1"
+            version = "1.7.2"
         )
 
         object LifeCycle : LibraryDep(
             name = "$androidx.lifecycle",
             group = "$androidx.lifecycle",
             artifacts = listOf(
+                "lifecycle-runtime-ktx",
                 "lifecycle-viewmodel-compose"
             ),
-            version = "2.6.0"
+            version = "2.6.1"
         )
 
         object Room {

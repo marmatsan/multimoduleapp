@@ -37,13 +37,13 @@ class Dependencies : Plugin<Settings> {
                 const val core = ":${Names.core}"
 
                 // onboarding
-                val onboardingDomain = ":${Names.onboarding}:${Names.onboardingDomain}"
-                val onboardingUi = ":${Names.onboarding}:${Names.onboardingUi}"
+                const val onboardingDomain = ":${Names.onboarding}:${Names.onboardingDomain}"
+                const val onboardingUi = ":${Names.onboarding}:${Names.onboardingUi}"
 
                 // tracker
-                val trackerData = ":${Names.tracker}:${Names.trackerData}"
-                val trackerDomain = ":${Names.tracker}:${Names.trackerDomain}"
-                val trackerUi = ":${Names.tracker}:${Names.trackerUi}"
+                const val trackerData = ":${Names.tracker}:${Names.trackerData}"
+                const val trackerDomain = ":${Names.tracker}:${Names.trackerDomain}"
+                const val trackerUi = ":${Names.tracker}:${Names.trackerUi}"
             }
 
         }
@@ -69,11 +69,6 @@ class Dependencies : Plugin<Settings> {
             LibraryDep.AndroidX.Hilt,
             LibraryDep.AndroidX.Activity,
             LibraryDep.AndroidX.LifeCycle,
-            LibraryDep.AndroidX.Compose.Material,
-            LibraryDep.AndroidX.Compose.Material3,
-            LibraryDep.AndroidX.Compose.Compiler,
-            LibraryDep.AndroidX.Compose.Runtime,
-            LibraryDep.AndroidX.Compose.Ui,
             LibraryDep.AndroidX.Room.RoomBundle,
             LibraryDep.AndroidX.Room.Compiler,
             LibraryDep.Coil,

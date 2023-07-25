@@ -14,14 +14,27 @@ plugins {
 }
 
 subprojects {
-    if (project.name == Env.Modules.Names.app) {
-        apply(plugin = "com.android.application")
-        apply(plugin = "com.marmatsan.android")
-        apply(plugin = "com.marmatsan.compose")
-    } else {
-        apply(plugin = "com.android.library")
-        apply(plugin = "com.marmatsan.android")
-        //Apply only gradle plugin when the module uses compose: apply(plugin = "com.marmatsan.compose")
+    when (project.name) {
+        Env.Modules.Names.app -> {
+            apply(plugin = "com.android.application")
+            apply(plugin = "com.marmatsan.android")
+            apply(plugin = "com.marmatsan.compose")
+        }
+
+        Env.Modules.Names.onboardingUi,
+        Env.Modules.Names.trackerUi -> {
+            apply(plugin = "com.android.library")
+            apply(plugin = "com.marmatsan.android")
+            apply(plugin = "com.marmatsan.compose")
+        }
+
+        Env.Modules.Names.core,
+        Env.Modules.Names.onboardingDomain,
+        Env.Modules.Names.trackerData,
+        Env.Modules.Names.trackerDomain -> {
+            apply(plugin = "com.android.library")
+            apply(plugin = "com.marmatsan.android")
+        }
     }
 }
 

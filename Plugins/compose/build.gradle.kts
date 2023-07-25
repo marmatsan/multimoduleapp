@@ -1,4 +1,5 @@
 plugins {
+    `version-catalog`
     `kotlin-dsl`
     `java-gradle-plugin`
 }

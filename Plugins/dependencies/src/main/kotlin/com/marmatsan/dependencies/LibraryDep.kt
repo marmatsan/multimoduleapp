@@ -83,60 +83,6 @@ open class LibraryDep(
 
         }
 
-        object Compose {
-            private const val compose = "compose"
-            private const val composeVersion = "1.3.0"
-            private const val composeCompilerVersion = "1.4.3"
-
-            object Material : LibraryDep(
-                name = "$androidx.$compose.material",
-                group = "$androidx.$compose.material",
-                artifacts = listOf(
-                    "material"
-                ),
-                version = composeVersion
-            )
-
-            object Material3 : LibraryDep(
-                name = "$androidx.$compose.material3",
-                group = "$androidx.$compose.material3",
-                artifacts = listOf(
-                    "material3"
-                ),
-                version = "1.0.1"
-            )
-
-            object Ui : LibraryDep(
-                name = "$androidx.$compose.ui",
-                group = "$androidx.$compose.ui",
-                artifacts = listOf(
-                    "ui",
-                    "ui-graphics",
-                    "ui-tooling-preview"
-                ),
-                version = composeVersion
-            )
-
-            object Runtime : LibraryDep(
-                name = "$androidx.$compose.runtime",
-                group = "$androidx.$compose.runtime",
-                artifacts = listOf(
-                    "runtime"
-                ),
-                version = composeVersion
-            )
-
-            object Compiler : LibraryDep(
-                name = "$androidx.$compose.compiler",
-                group = "$androidx.$compose.compiler",
-                artifacts = listOf(
-                    "compiler"
-                ),
-                version = composeCompilerVersion
-            )
-
-        }
-
     }
 
     object Google {

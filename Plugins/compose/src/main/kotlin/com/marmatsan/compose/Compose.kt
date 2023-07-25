@@ -5,37 +5,50 @@ import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.dependencies
 
 class Compose : Plugin<Project> {
     override fun apply(project: Project) {
 
-        project.afterEvaluate {
-
-            val androidExtension = when {
-                project.plugins.hasPlugin(AppPlugin::class.java) -> {
-                    project.extensions.getByName("android") as ApplicationExtension
-                }
-
-                else -> project.extensions.getByName("android") as LibraryExtension
+        val androidExtension = when {
+            project.plugins.hasPlugin(AppPlugin::class.java) -> {
+                project.extensions.getByName("android") as ApplicationExtension
             }
 
-            androidExtension.apply {
-
-                defaultConfig {
-                    vectorDrawables {
-                        useSupportLibrary = true
-                    }
-                }
-
-                buildFeatures {
-                    compose = true
-                }
-
-                composeOptions {
-                    kotlinCompilerExtensionVersion = "1.4.8"
-                }
-
+            else -> {
+                project.extensions.getByName("android") as LibraryExtension
             }
+        }
+
+        androidExtension.apply {
+
+            defaultConfig {
+                vectorDrawables {
+                    useSupportLibrary = true
+                }
+            }
+
+            buildFeatures {
+                compose = true
+            }
+
+            composeOptions {
+                kotlinCompilerExtensionVersion = "1.5.0"
+            }
+
+        }
+
+        val composeVersion = "1.4.3"
+
+        project.dependencies {
+            add("implementation", "androidx.compose.animation:animation:$composeVersion")
+            add("implementation", "androidx.compose.foundation:foundation:$composeVersion")
+            add("implementation", "androidx.compose.material:material:$composeVersion")
+            add("implementation", "androidx.compose.material3:material3:1.1.1")
+            add("implementation", "androidx.compose.runtime:runtime:$composeVersion")
+            add("implementation", "androidx.compose.compiler:compiler:1.5.0")
+            add("implementation", "androidx.compose.ui:ui-tooling:$composeVersion")
+            add("implementation", "androidx.compose.ui:ui:$composeVersion")
         }
 
     }

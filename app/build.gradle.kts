@@ -40,9 +40,5 @@ dependencies {
     implementation(libs.bundles.androidx.lifecycle)
     // Activity Compose
     implementation(libs.androidx.activity)
-    // Compose
-    implementation(libs.bundles.androidx.compose.ui)
-    // Material 3
-    implementation(libs.androidx.compose.material3)
 
 }

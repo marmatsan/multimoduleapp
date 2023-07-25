@@ -25,7 +25,7 @@ open class PluginDep(
 
     object JetBrains {
         private const val group = "org.jetbrains.kotlin"
-        private const val version = "1.8.22"
+        private const val version = "1.9.0"
 
         object Android : PluginDep(
             name = "$group.android",

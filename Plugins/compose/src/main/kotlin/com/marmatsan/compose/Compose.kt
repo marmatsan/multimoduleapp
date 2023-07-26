@@ -47,8 +47,13 @@ class Compose : Plugin<Project> {
             add("implementation", "androidx.compose.material3:material3:1.1.1")
             add("implementation", "androidx.compose.runtime:runtime:$composeVersion")
             add("implementation", "androidx.compose.compiler:compiler:1.5.0")
-            add("implementation", "androidx.compose.ui:ui-tooling:$composeVersion")
+
+            // UI
             add("implementation", "androidx.compose.ui:ui:$composeVersion")
+            add("implementation", "androidx.compose.ui:ui-tooling:$composeVersion")
+            add("implementation", "androidx.compose.ui:ui-geometry:$composeVersion")
+            add("implementation", "androidx.compose.ui:ui-graphics:$composeVersion")
+            add("implementation", "androidx.compose.ui:ui-unit:$composeVersion")
         }
 
     }

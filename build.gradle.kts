@@ -21,6 +21,7 @@ subprojects {
             apply(plugin = "com.marmatsan.compose")
         }
 
+        Env.Modules.Names.coreUi,
         Env.Modules.Names.onboardingUi,
         Env.Modules.Names.trackerUi -> {
             apply(plugin = "com.android.library")

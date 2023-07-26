@@ -18,8 +18,6 @@
             </builds>
           </compositeBuild>
         </compositeConfiguration>
-        <option name="testRunner" value="GRADLE" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleHome" value="$PROJECT_DIR$/../../../../../Gradle" />
         <option name="gradleJvm" value="jbrsdk_jcef-17" />
@@ -32,6 +30,7 @@
             <option value="$PROJECT_DIR$/Plugins/dependencies" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core-ui" />
             <option value="$PROJECT_DIR$/onboarding" />
             <option value="$PROJECT_DIR$/onboarding/onboarding_domain" />
             <option value="$PROJECT_DIR$/onboarding/onboarding_ui" />

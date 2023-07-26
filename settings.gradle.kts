@@ -16,7 +16,10 @@ plugins {
 rootProject.name = "MultiLayerApp"
 include(
     Env.Modules.Identifiers.app,
-    Env.Modules.Identifiers.core,
+    *arrayOf(
+        Env.Modules.Identifiers.core,
+        Env.Modules.Identifiers.coreUi,
+    ),
     *arrayOf(
         Env.Modules.Identifiers.onboardingDomain,
         Env.Modules.Identifiers.onboardingUi

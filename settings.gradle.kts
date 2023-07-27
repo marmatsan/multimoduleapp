@@ -13,7 +13,7 @@ plugins {
     id("com.marmatsan.dependencies") apply true
 }
 
-rootProject.name = "MultiLayerApp"
+rootProject.name = "MultiModuleApp"
 include(
     Env.Modules.Identifiers.app,
     *arrayOf(

@@ -1,5 +1,8 @@
 package com.marmatsan.dependencies
 
+import com.marmatsan.dependencies.logic.Catalog
+import com.marmatsan.dependencies.logic.Library as LibraryDep
+import com.marmatsan.dependencies.logic.Plugin as PluginDep
 import org.gradle.api.Plugin
 import org.gradle.api.initialization.Settings
 import org.gradle.api.initialization.resolve.DependencyResolutionManagement

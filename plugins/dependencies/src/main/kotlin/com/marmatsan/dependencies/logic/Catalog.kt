@@ -1,4 +1,4 @@
-package com.marmatsan.dependencies
+package com.marmatsan.dependencies.logic
 
 open class Catalog(
     val name: String,

@@ -1,6 +1,6 @@
-package com.marmatsan.dependencies
+package com.marmatsan.dependencies.logic
 
-open class LibraryDep(
+open class Library(
     override val name: String,
     override val group: String,
     val artifacts: List<String>,
@@ -10,7 +10,7 @@ open class LibraryDep(
     object AndroidX {
         private const val androidx = "androidx"
 
-        object Core : LibraryDep(
+        object Core : Library(
             name = "$androidx.core",
             group = "$androidx.core",
             artifacts = listOf(
@@ -19,7 +19,7 @@ open class LibraryDep(
             version = "1.10.1"
         )
 
-        object Navigation : LibraryDep(
+        object Navigation : Library(
             name = "$androidx.navigation",
             group = "$androidx.navigation",
             artifacts = listOf(
@@ -28,7 +28,7 @@ open class LibraryDep(
             version = "2.5.3"
         )
 
-        object Hilt : LibraryDep(
+        object Hilt : Library(
             name = "$androidx.hilt",
             group = "$androidx.hilt",
             artifacts = listOf(
@@ -37,7 +37,7 @@ open class LibraryDep(
             version = "1.0.0"
         )
 
-        object Activity : LibraryDep(
+        object Activity : Library(
             name = "$androidx.activity",
             group = "$androidx.activity",
             artifacts = listOf(
@@ -46,7 +46,7 @@ open class LibraryDep(
             version = "1.7.2"
         )
 
-        object LifeCycle : LibraryDep(
+        object LifeCycle : Library(
             name = "$androidx.lifecycle",
             group = "$androidx.lifecycle",
             artifacts = listOf(
@@ -61,7 +61,7 @@ open class LibraryDep(
             private const val group = "$androidx.room"
             private const val version = "2.5.1"
 
-            object RoomBundle : LibraryDep(
+            object RoomBundle : Library(
                 name = group,
                 group = group,
                 artifacts = listOf(
@@ -72,7 +72,7 @@ open class LibraryDep(
                 version = version
             )
 
-            object Compiler : LibraryDep(
+            object Compiler : Library(
                 name = "$group.compiler",
                 group = group,
                 artifacts = listOf(
@@ -88,7 +88,7 @@ open class LibraryDep(
     object Google {
         private const val google = "com.google"
 
-        object DaggerHilt : LibraryDep(
+        object DaggerHilt : Library(
             name = "$google.daggerHilt",
             group = "$google.dagger",
             artifacts = listOf(
@@ -97,7 +97,7 @@ open class LibraryDep(
             version = "2.47"
         )
 
-        object DaggerHiltCompiler : LibraryDep(
+        object DaggerHiltCompiler : Library(
             name = "$google.daggerHiltCompiler",
             group = "$google.dagger",
             artifacts = listOf(
@@ -107,7 +107,7 @@ open class LibraryDep(
         )
     }
 
-    object Coil : LibraryDep(
+    object Coil : Library(
         name = "io.coil-kt",
         group = "io.coil-kt",
         artifacts = listOf(
@@ -116,7 +116,7 @@ open class LibraryDep(
         version = "1.3.2"
     )
 
-    object Ktor : LibraryDep(
+    object Ktor : Library(
         name = "io.ktor",
         group = "io.ktor",
         artifacts = listOf(

@@ -1,6 +1,6 @@
-package com.marmatsan.dependencies
+package com.marmatsan.dependencies.logic
 
-open class PluginDep(
+open class Plugin(
     override val name: String,
     override val group: String,
     override val version: String
@@ -8,15 +8,15 @@ open class PluginDep(
 
     object Android {
         private const val group = "com.android"
-        private const val version = "7.4.1"
+        private const val version = "8.0.0"
 
-        object Application : PluginDep(
+        object Application : Plugin(
             name = "$group.application",
             group = "$group.application",
             version = version
         )
 
-        object Library : PluginDep(
+        object Library : Plugin(
             name = "$group.library",
             group = "$group.library",
             version = version
@@ -27,25 +27,25 @@ open class PluginDep(
         private const val group = "org.jetbrains.kotlin"
         private const val version = "1.9.0"
 
-        object Android : PluginDep(
+        object Android : Plugin(
             name = "$group.android",
             group = "$group.android",
             version = version
         )
 
-        object Jvm : PluginDep(
+        object Jvm : Plugin(
             name = "$group.jvm",
             group = "$group.jvm",
             version = version
         )
 
-        object Kapt : PluginDep(
+        object Kapt : Plugin(
             name = "$group.kapt",
             group = "$group.kapt",
             version = version
         )
 
-        object Parcelize : PluginDep(
+        object Parcelize : Plugin(
             name = "$group.plugin.parcelize",
             group = "$group.plugin.parcelize",
             version = version
@@ -55,13 +55,13 @@ open class PluginDep(
     object Google {
         private const val group = "com.google"
 
-        object DaggerHilt : PluginDep(
+        object DaggerHilt : Plugin(
             name = "$group.dagger.hilt.android",
             group = "$group.dagger.hilt.android",
             version = "2.47"
         )
 
-        object Ksp : PluginDep(
+        object Ksp : Plugin(
             name = "$group.devtools.ksp",
             group = "$group.devtools.ksp",
             version = "1.8.22-1.0.11"

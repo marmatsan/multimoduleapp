@@ -25,6 +25,7 @@ dependencies {
     /* Modules */
     // Core
     implementation(project(Env.Modules.Identifiers.core))
+    implementation(project(Env.Modules.Identifiers.coreUi))
     // Onboarding
     implementation(project(Env.Modules.Identifiers.onboardingDomain))
     implementation(project(Env.Modules.Identifiers.onboardingUi))

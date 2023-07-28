@@ -1,4 +1,4 @@
-package com.marmatsan.dependencies
+package com.marmatsan.dependencies.logic
 
 abstract class Dependency(
     open val name: String,

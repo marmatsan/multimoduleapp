@@ -6,7 +6,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
-    // includeBuild("./plugins")
+    includeBuild("./plugins")
 }
 
 plugins {

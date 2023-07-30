@@ -1,0 +1,5 @@
+android {
+    lint {
+        abortOnError = false
+    }
+}

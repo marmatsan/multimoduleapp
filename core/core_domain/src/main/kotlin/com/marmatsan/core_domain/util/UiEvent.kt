@@ -1,4 +1,4 @@
-package com.marmatsan.core.util
+package com.marmatsan.core_domain.util
 
 sealed class UiEvent {
     data class Navigate(val route: String) : UiEvent()

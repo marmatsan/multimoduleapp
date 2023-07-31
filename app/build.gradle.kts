@@ -12,7 +12,7 @@ android {
         }
     }
 
-    packagingOptions {
+    packaging {
         resources {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
         }
@@ -24,7 +24,7 @@ dependencies {
 
     /* Modules */
     // Core
-    implementation(project(Env.Modules.Identifiers.core))
+    implementation(project(Env.Modules.Identifiers.coreDomain))
     implementation(project(Env.Modules.Identifiers.coreUi))
     // Onboarding
     implementation(project(Env.Modules.Identifiers.onboardingDomain))

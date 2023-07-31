@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.marmatsan.core.navigation.Routes
+import com.marmatsan.core_domain.navigation.Routes
 import com.marmatsan.multilayerapp.navigation.navigate
 import com.marmatsan.multilayerapp.ui.theme.MultiLayerAppTheme
 import com.marmatsan.onboarding_ui.welcome.WelcomeScreen

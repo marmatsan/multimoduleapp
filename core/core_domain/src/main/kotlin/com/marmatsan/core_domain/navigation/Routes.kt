@@ -1,4 +1,4 @@
-package com.marmatsan.core.navigation
+package com.marmatsan.core_domain.navigation
 
 object Routes {
 

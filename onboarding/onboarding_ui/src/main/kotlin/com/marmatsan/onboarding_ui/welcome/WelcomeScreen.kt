@@ -9,9 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.marmatsan.core.R
-import com.marmatsan.core.navigation.Routes
-import com.marmatsan.core.util.UiEvent
+import com.marmatsan.core_domain.R
+import com.marmatsan.core_domain.navigation.Routes
+import com.marmatsan.core_domain.util.UiEvent
 import com.marmatsan.core_ui.LocalSpacing
 import com.marmatsan.onboarding_ui.components.ActionButton
 

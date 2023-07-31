@@ -29,7 +29,8 @@ subprojects {
             apply(plugin = "com.marmatsan.compose")
         }
 
-        Env.Modules.Names.core,
+        Env.Modules.Names.coreData,
+        Env.Modules.Names.coreDomain,
         Env.Modules.Names.onboardingDomain,
         Env.Modules.Names.trackerData,
         Env.Modules.Names.trackerDomain -> {

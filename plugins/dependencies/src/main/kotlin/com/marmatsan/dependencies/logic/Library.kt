@@ -56,6 +56,15 @@ open class Library(
             version = "2.6.1"
         )
 
+        object Datastore : Library(
+            name = "$androidx.datastore",
+            group = "$androidx.datastore",
+            artifacts = listOf(
+                "datastore"
+            ),
+            version = "1.0.0"
+        )
+
         object Room {
 
             private const val group = "$androidx.room"

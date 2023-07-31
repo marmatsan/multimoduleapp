@@ -19,9 +19,9 @@ class Dependencies : Plugin<Settings> {
 
                 // core
                 const val core = "core"
-                const val coreData = "core_data"
-                const val coreDomain = "core_domain"
-                const val coreUi = "core_ui"
+                const val coreData = "${core}_data"
+                const val coreDomain = "${core}_domain"
+                const val coreUi = "${core}_ui"
 
                 // onboarding
                 const val onboarding = "onboarding"

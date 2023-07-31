@@ -1,12 +1,15 @@
 package com.marmatsan.core_data.preferences
 
+import androidx.datastore.core.DataStore
 import com.marmatsan.core_domain.model.ActivityLevel
 import com.marmatsan.core_domain.model.Gender
 import com.marmatsan.core_domain.model.GoalType
 import com.marmatsan.core_domain.model.UserInfo
 import com.marmatsan.core_domain.preferences.Preferences
 
-class DefaultPreferences : Preferences {
+class DefaultPreferences(
+    val dataStore: DataStore<String>
+) : Preferences {
     override fun saveGender(gender: Gender) {
         TODO("Not yet implemented")
     }

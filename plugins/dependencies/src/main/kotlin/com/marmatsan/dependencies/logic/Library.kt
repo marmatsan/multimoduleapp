@@ -25,7 +25,7 @@ open class Library(
             artifacts = listOf(
                 "navigation-compose"
             ),
-            version = "2.5.3"
+            version = "2.6.0"
         )
 
         object Hilt : Library(

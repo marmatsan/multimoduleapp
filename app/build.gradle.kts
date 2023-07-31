@@ -41,5 +41,7 @@ dependencies {
     implementation(libs.bundles.androidx.lifecycle)
     // Activity Compose
     implementation(libs.androidx.activity)
+    // Navigation
+    implementation(libs.androidx.navigation)
 
 }

@@ -43,7 +43,6 @@ class Compose : Plugin<Project> {
         project.dependencies {
             add("implementation", "androidx.compose.animation:animation:$composeVersion")
             add("implementation", "androidx.compose.foundation:foundation:$composeVersion")
-            add("implementation", "androidx.compose.material:material:$composeVersion")
             add("implementation", "androidx.compose.material3:material3:1.1.1")
             add("implementation", "androidx.compose.runtime:runtime:$composeVersion")
             add("implementation", "androidx.compose.compiler:compiler:1.5.0")

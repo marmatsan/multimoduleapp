@@ -1,4 +1,4 @@
-package com.marmatsan.multilayerapp.ui.theme
+package com.marmatsan.multimoduleapp.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

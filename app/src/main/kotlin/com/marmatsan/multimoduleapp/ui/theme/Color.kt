@@ -1,4 +1,4 @@
-package com.marmatsan.multilayerapp.ui.theme
+package com.marmatsan.multimoduleapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -63,15 +63,3 @@ val dark_shadow = Color(0xFF000000)
 val dark_surfaceTint = Color(0xFFA5C8FF)
 val dark_outlineVariant = Color(0xFF43474E)
 val dark_scrim = Color(0xFF000000)
-
-
-val seed = Color(0xFF0074D3)
-val CustomColor1 = Color(0xFF0074D3)
-val light_CustomColor1 = Color(0xFF005FAE)
-val light_onCustomColor1 = Color(0xFFFFFFFF)
-val light_CustomColor1Container = Color(0xFFD4E3FF)
-val light_onCustomColor1Container = Color(0xFF001C3A)
-val dark_CustomColor1 = Color(0xFFA5C8FF)
-val dark_onCustomColor1 = Color(0xFF00315E)
-val dark_CustomColor1Container = Color(0xFF004785)
-val dark_onCustomColor1Container = Color(0xFFD4E3FF)

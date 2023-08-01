@@ -13,8 +13,8 @@ class Android : Plugin<Project> {
     override fun apply(project: Project) {
 
         project.plugins.apply("org.jetbrains.kotlin.android")
-        project.plugins.apply("com.google.dagger.hilt.android")
         project.plugins.apply("org.jetbrains.kotlin.kapt")
+        project.plugins.apply("com.google.dagger.hilt.android")
 
         val androidExtension = project.extensions.getByName("android") as BaseExtension
 
@@ -50,7 +50,7 @@ class Android : Plugin<Project> {
 
         project.dependencies {
             add("implementation", "com.google.dagger:hilt-android:2.47")
-            add("annotationProcessor", "com.google.dagger:hilt-android-compiler:2.47")
+            add("kapt", "com.google.dagger:hilt-android-compiler:2.47")
         }
 
     }

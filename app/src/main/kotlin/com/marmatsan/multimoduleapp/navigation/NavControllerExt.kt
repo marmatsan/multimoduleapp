@@ -1,4 +1,4 @@
-package com.marmatsan.multilayerapp.navigation
+package com.marmatsan.multimoduleapp.navigation
 
 import androidx.navigation.NavController
 import com.marmatsan.core_domain.util.UiEvent

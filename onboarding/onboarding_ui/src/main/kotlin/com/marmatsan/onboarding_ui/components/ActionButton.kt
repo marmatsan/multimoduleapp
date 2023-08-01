@@ -32,6 +32,6 @@ fun ActionButton(
 fun ActionButtonPreview() {
     ActionButton(
         text = "Next",
-        onClick = {}
+        onClick = { }
     )
 }

@@ -39,7 +39,7 @@ fun WelcomeScreen(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             text = stringResource(id = R.string.next),
             onClick = {
-                onNavigate(UiEvent.Navigate(Routes.OnBoarding.AGE))
+                onNavigate(UiEvent.Navigate(Routes.OnBoarding.GENDER))
             }
         )
     }
@@ -49,6 +49,6 @@ fun WelcomeScreen(
 @Composable
 fun WelcomeScreenPreview() {
     WelcomeScreen(
-        onNavigate = {}
+        onNavigate = { }
     )
 }

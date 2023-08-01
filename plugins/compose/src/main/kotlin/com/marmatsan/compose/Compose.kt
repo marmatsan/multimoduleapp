@@ -46,6 +46,10 @@ class Compose : Plugin<Project> {
             add("implementation", "androidx.compose.material3:material3:1.1.1")
             add("implementation", "androidx.compose.runtime:runtime:$composeVersion")
             add("implementation", "androidx.compose.compiler:compiler:1.5.0")
+            add("implementation", "androidx.navigation:navigation-compose:2.6.0")
+            add("implementation", "androidx.hilt:hilt-navigation-compose:1.0.0")
+            add("implementation", "androidx.activity:activity-compose:1.7.2")
+            add("implementation", "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
 
             // UI
             add("implementation", "androidx.compose.ui:ui:$composeVersion")

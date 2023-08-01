@@ -1,4 +1,4 @@
-package com.marmatsan.multilayerapp
+package com.marmatsan.multimoduleapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,10 +11,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.marmatsan.core_domain.navigation.Routes
-import com.marmatsan.multilayerapp.navigation.navigate
-import com.marmatsan.multilayerapp.ui.theme.MultiLayerAppTheme
+import com.marmatsan.multimoduleapp.navigation.navigate
+import com.marmatsan.multimoduleapp.ui.theme.MultiLayerAppTheme
+import com.marmatsan.onboarding_ui.gender.GenderScreen
 import com.marmatsan.onboarding_ui.welcome.WelcomeScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +35,10 @@ class MainActivity : ComponentActivity() {
                         composable(Routes.OnBoarding.WELCOME) {
                             WelcomeScreen(onNavigate = navController::navigate)
                         }
-                        composable(Routes.OnBoarding.AGE) {
-
-                        }
                         composable(Routes.OnBoarding.GENDER) {
+                            GenderScreen(onNavigate = navController::navigate)
+                        }
+                        composable(Routes.OnBoarding.AGE) {
 
                         }
                         composable(Routes.OnBoarding.HEIGHT) {

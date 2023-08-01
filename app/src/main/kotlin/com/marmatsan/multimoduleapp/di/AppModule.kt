@@ -1,0 +1,46 @@
+package com.marmatsan.multimoduleapp.di
+
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.core.DataStoreFactory
+import androidx.datastore.dataStoreFile
+import com.marmatsan.core_data.preferences.DefaultPreferences
+import com.marmatsan.core_data.preferences.UserInfoSerializer
+import com.marmatsan.core_domain.model.UserInfo
+import com.marmatsan.core_domain.preferences.Preferences
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
+
+    private const val DATA_STORE_FILE_NAME = "user_info.json"
+
+    @Singleton
+    @Provides
+    fun provideProtoDataStore(
+        @ApplicationContext appContext: Context
+    ): DataStore<UserInfo> {
+        return DataStoreFactory.create(
+            serializer = UserInfoSerializer,
+            produceFile = { appContext.dataStoreFile(DATA_STORE_FILE_NAME) },
+            corruptionHandler = null,
+            scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun providePreferences(dataStore: DataStore<UserInfo>): Preferences {
+        return DefaultPreferences(dataStore)
+    }
+
+}

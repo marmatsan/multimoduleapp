@@ -81,6 +81,7 @@ class Dependencies : Plugin<Settings> {
             LibraryDep.AndroidX.Room.Compiler,
             LibraryDep.AndroidX.Datastore,
             LibraryDep.Coil,
+            LibraryDep.Jetbrains.Serialization,
             LibraryDep.Google.DaggerHilt,
             LibraryDep.Google.DaggerHiltCompiler,
             LibraryDep.Ktor
@@ -96,6 +97,7 @@ class Dependencies : Plugin<Settings> {
             PluginDep.JetBrains.Jvm,
             PluginDep.JetBrains.Kapt,
             PluginDep.JetBrains.Parcelize,
+            PluginDep.JetBrains.Serialization,
             PluginDep.Google.DaggerHilt,
             PluginDep.Google.Ksp
         )

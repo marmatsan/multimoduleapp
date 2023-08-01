@@ -1,13 +1,16 @@
 package com.marmatsan.core_domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class UserInfo(
-    val gender: Gender,
-    val age: Int,
-    val weight: Float,
-    val height: Int,
-    val activityLevel: ActivityLevel,
-    val goalType: GoalType,
-    val carbRatio: Float,
-    val proteinRatio: Float,
-    val fatRatio: Float
+    val gender: Gender? = null,
+    val age: Int? = null,
+    val weight: Float? = null,
+    val height: Int? = null,
+    val activityLevel: ActivityLevel? = null,
+    val goal: Goal? = null,
+    val carbRatio: Float? = null,
+    val proteinRatio: Float? = null,
+    val fatRatio: Float? = null
 )

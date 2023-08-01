@@ -1,17 +1,24 @@
 package com.marmatsan.core_domain.model
 
-sealed class ActivityLevel(val name: String) {
-    object Low : ActivityLevel(name = "low")
-    object Medium : ActivityLevel(name = "medium")
-    object High : ActivityLevel(name = "high")
+import kotlinx.serialization.Serializable
+
+@Serializable
+sealed class ActivityLevel {
+
+    enum class ActivityLevelType {
+        LOW, MEDIUM, HIGH
+    }
+
+    object Low : ActivityLevel()
+    object Medium : ActivityLevel()
+    object High : ActivityLevel()
 
     companion object {
-        fun fromString(name: String): ActivityLevel {
-            return when (name) {
-                "low" ->  Low
-                "medium" -> Medium
-                "high" -> High
-                else -> throw IllegalArgumentException("Only \"low\", \"medium\" and \"high\" are allowed")
+        fun fromType(type: ActivityLevelType): ActivityLevel {
+            return when (type) {
+                ActivityLevelType.LOW -> Low
+                ActivityLevelType.MEDIUM -> Medium
+                ActivityLevelType.HIGH -> High
             }
         }
     }

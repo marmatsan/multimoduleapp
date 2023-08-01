@@ -9,8 +9,13 @@ sealed class Goal {
         LOSE_WEIGHT, KEEP_WEIGHT, GAIN_WEIGHT
     }
 
+    @Serializable
     object LoseWeight : Goal()
+
+    @Serializable
     object KeepWeight : Goal()
+
+    @Serializable
     object GainWeight : Goal()
 
     companion object {

@@ -8,8 +8,13 @@ sealed class Gender {
         MALE, FEMALE, UNKNOWN
     }
 
+    @Serializable
     object Male : Gender()
+
+    @Serializable
     object Female : Gender()
+
+    @Serializable
     object Unknown : Gender()
 
     companion object {

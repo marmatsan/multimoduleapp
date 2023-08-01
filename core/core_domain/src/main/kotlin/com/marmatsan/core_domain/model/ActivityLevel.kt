@@ -9,8 +9,13 @@ sealed class ActivityLevel {
         LOW, MEDIUM, HIGH
     }
 
+    @Serializable
     object Low : ActivityLevel()
+
+    @Serializable
     object Medium : ActivityLevel()
+
+    @Serializable
     object High : ActivityLevel()
 
     companion object {

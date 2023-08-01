@@ -13,7 +13,7 @@ import com.marmatsan.core_domain.use_case.FilterOutDigits
 import com.marmatsan.core_domain.util.UiEvent
 import com.marmatsan.core_domain.util.UiText
 import com.marmatsan.core_domain.R
-import com.marmatsan.core_domain.navigation.Routes
+import com.marmatsan.core_domain.navigation.Route
 
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -48,7 +48,7 @@ class AgeViewModel @Inject constructor(
                 return@launch
             }
             preferences.saveAge(ageNumber)
-            _uiEvent.send(UiEvent.Navigate(Routes.OnBoarding.HEIGHT))
+            _uiEvent.send(UiEvent.Navigate(Route.OnBoarding.HEIGHT))
         }
     }
 }

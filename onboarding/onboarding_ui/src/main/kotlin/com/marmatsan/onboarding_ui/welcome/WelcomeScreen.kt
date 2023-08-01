@@ -10,7 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.marmatsan.core_domain.R
-import com.marmatsan.core_domain.navigation.Routes
+import com.marmatsan.core_domain.navigation.Route
 import com.marmatsan.core_domain.util.UiEvent
 import com.marmatsan.core_ui.LocalSpacing
 import com.marmatsan.onboarding_ui.components.ActionButton
@@ -39,7 +39,7 @@ fun WelcomeScreen(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             text = stringResource(id = R.string.next),
             onClick = {
-                onNavigate(UiEvent.Navigate(Routes.OnBoarding.GENDER))
+                onNavigate(UiEvent.Navigate(Route.OnBoarding.GENDER))
             }
         )
     }

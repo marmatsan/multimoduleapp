@@ -1,6 +1,9 @@
 package com.marmatsan.android
 
+import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.LibraryExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -16,22 +19,37 @@ class Android : Plugin<Project> {
         project.plugins.apply("org.jetbrains.kotlin.kapt")
         project.plugins.apply("com.google.dagger.hilt.android")
 
-        val androidExtension = project.extensions.getByName("android") as BaseExtension
+        val androidExtension = when {
+            project.plugins.hasPlugin(AppPlugin::class.java) -> {
+                project.extensions.getByName("android") as ApplicationExtension
+            }
+
+            else -> {
+                project.extensions.getByName("android") as LibraryExtension
+            }
+        }
 
         androidExtension.apply {
             namespace = "com.marmatsan.${project.name}"
-            compileSdkVersion(apiLevel = 33)
+            compileSdk = 33
 
             defaultConfig {
-
-                val majorVersion = 1
-                val minorVersion = 0
-                val bugfixVersion = 0
-
                 minSdk = 21
-                targetSdk = 33
-                versionCode = majorVersion * 1000 + minorVersion * 100 + bugfixVersion
-                versionName = "${majorVersion}.${minorVersion}.$bugfixVersion"
+
+                if (androidExtension is ApplicationExtension) {
+                    androidExtension.apply {
+                        defaultConfig {
+
+                            val majorVersion = 1
+                            val minorVersion = 0
+                            val bugfixVersion = 0
+
+                            targetSdk = 33
+                            versionCode = majorVersion * 1000 + minorVersion * 100 + bugfixVersion
+                            versionName = "${majorVersion}.${minorVersion}.$bugfixVersion"
+                        }
+                    }
+                }
 
                 compileOptions {
                     sourceCompatibility = JavaVersion.VERSION_17

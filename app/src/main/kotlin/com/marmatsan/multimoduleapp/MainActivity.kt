@@ -4,13 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.*
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.marmatsan.core_domain.navigation.Routes
+import com.marmatsan.core_domain.navigation.Route
 import com.marmatsan.multimoduleapp.navigation.navigate
 import com.marmatsan.multimoduleapp.ui.theme.MultiLayerAppTheme
 import com.marmatsan.onboarding_ui.gender.GenderScreen
@@ -23,43 +24,47 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MultiLayerAppTheme {
-                Surface(
+
+                val snackbarHostState = remember { SnackbarHostState() }
+                val scope = rememberCoroutineScope()
+
+                Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
+                    snackbarHost = { SnackbarHost(snackbarHostState) }
+                ) { paddingValues ->
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = Routes.OnBoarding.WELCOME
+                        startDestination = Route.OnBoarding.WELCOME
                     ) {
-                        composable(Routes.OnBoarding.WELCOME) {
+                        composable(Route.OnBoarding.WELCOME) {
                             WelcomeScreen(onNavigate = navController::navigate)
                         }
-                        composable(Routes.OnBoarding.GENDER) {
+                        composable(Route.OnBoarding.GENDER) {
                             GenderScreen(onNavigate = navController::navigate)
                         }
-                        composable(Routes.OnBoarding.AGE) {
+                        composable(Route.OnBoarding.AGE) {
 
                         }
-                        composable(Routes.OnBoarding.HEIGHT) {
+                        composable(Route.OnBoarding.HEIGHT) {
 
                         }
-                        composable(Routes.OnBoarding.WEIGHT) {
+                        composable(Route.OnBoarding.WEIGHT) {
 
                         }
-                        composable(Routes.OnBoarding.NUTRIENT_GOAL) {
+                        composable(Route.OnBoarding.NUTRIENT_GOAL) {
 
                         }
-                        composable(Routes.OnBoarding.ACTIVITY) {
+                        composable(Route.OnBoarding.ACTIVITY) {
 
                         }
-                        composable(Routes.OnBoarding.GOAL) {
+                        composable(Route.OnBoarding.GOAL) {
 
                         }
-                        composable(Routes.Tracker.OVERVIEW) {
+                        composable(Route.Tracker.OVERVIEW) {
 
                         }
-                        composable(Routes.Tracker.SEARCH) {
+                        composable(Route.Tracker.SEARCH) {
 
                         }
                     }

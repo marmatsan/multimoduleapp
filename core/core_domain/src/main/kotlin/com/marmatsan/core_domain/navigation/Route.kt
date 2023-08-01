@@ -1,6 +1,6 @@
 package com.marmatsan.core_domain.navigation
 
-object Routes {
+object Route {
 
     object OnBoarding {
         const val WELCOME = "welcome"

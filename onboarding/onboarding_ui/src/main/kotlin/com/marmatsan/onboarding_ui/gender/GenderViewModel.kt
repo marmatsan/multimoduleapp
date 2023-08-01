@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marmatsan.core_domain.model.Gender
-import com.marmatsan.core_domain.navigation.Routes
+import com.marmatsan.core_domain.navigation.Route
 import com.marmatsan.core_domain.preferences.Preferences
 import com.marmatsan.core_domain.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,7 +33,7 @@ class GenderViewModel @Inject constructor(
     fun onNextClick() {
         viewModelScope.launch {
             preferences.saveGender(selectedGender)
-            _uiEvent.send(UiEvent.Navigate(Routes.OnBoarding.AGE))
+            _uiEvent.send(UiEvent.Navigate(Route.OnBoarding.AGE))
         }
     }
 }

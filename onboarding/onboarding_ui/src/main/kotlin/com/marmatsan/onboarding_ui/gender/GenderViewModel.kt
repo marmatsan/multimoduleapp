@@ -26,11 +26,11 @@ class GenderViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun onGenderClicked(gender: Gender) {
+    fun onGenderClick(gender: Gender) {
         selectedGender = gender
     }
 
-    fun onNextClicked() {
+    fun onNextClick() {
         viewModelScope.launch {
             preferences.saveGender(selectedGender)
             _uiEvent.send(UiEvent.Navigate(Routes.OnBoarding.AGE))

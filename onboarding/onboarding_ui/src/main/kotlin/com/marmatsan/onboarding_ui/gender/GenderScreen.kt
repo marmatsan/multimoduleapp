@@ -50,7 +50,7 @@ fun GenderScreen(
                     text = stringResource(id = R.string.male),
                     isSelected = viewModel.selectedGender is Gender.Male,
                     onClick = {
-                        viewModel.onGenderClicked(Gender.Male)
+                        viewModel.onGenderClick(Gender.Male)
                     }
                 )
                 Spacer(modifier = Modifier.width(spacing.spaceMedium))
@@ -58,14 +58,14 @@ fun GenderScreen(
                     text = stringResource(id = R.string.female),
                     isSelected = viewModel.selectedGender is Gender.Female,
                     onClick = {
-                        viewModel.onGenderClicked(Gender.Female)
+                        viewModel.onGenderClick(Gender.Female)
                     }
                 )
             }
         }
         ActionButton(
             text = stringResource(id = R.string.next),
-            onClick = viewModel::onNextClicked,
+            onClick = viewModel::onNextClick,
             modifier = Modifier.align(Alignment.BottomEnd)
         )
     }

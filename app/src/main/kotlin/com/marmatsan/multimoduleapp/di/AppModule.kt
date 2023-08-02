@@ -9,6 +9,7 @@ import com.marmatsan.core_data.preferences.UserInfoSerializer
 import com.marmatsan.core_domain.model.UserInfo
 import com.marmatsan.core_domain.preferences.Preferences
 import com.marmatsan.core_domain.use_case.FilterOutDigits
+import com.marmatsan.core_domain.use_case.FilterOutWeight
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,5 +50,12 @@ object AppModule {
     fun provideFilterOutDigitsUseCase(): FilterOutDigits {
         return FilterOutDigits()
     }
+
+    @Singleton
+    @Provides
+    fun provideFilterOutWeightUseCase(): FilterOutWeight {
+        return FilterOutWeight()
+    }
+
 
 }

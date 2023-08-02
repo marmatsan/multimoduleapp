@@ -1,4 +1,4 @@
-package com.marmatsan.onboarding_ui.gender
+package com.marmatsan.onboarding_ui.nutrient_goal
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.SnackbarHostState
@@ -11,18 +11,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marmatsan.core_domain.R
-import com.marmatsan.core_domain.model.Gender
 import com.marmatsan.core_domain.util.UiEvent
 import com.marmatsan.core_ui.LocalSpacing
 import com.marmatsan.onboarding_ui.components.ActionButton
-import com.marmatsan.onboarding_ui.components.SelectableButton
+import com.marmatsan.onboarding_ui.components.UnitTextField
 
 @Composable
-fun GenderScreen(
+fun NutrientGoalScreen(
     modifier: Modifier = Modifier,
     snackbarHostState: SnackbarHostState,
     onNavigate: (UiEvent.Navigate) -> Unit,
-    viewModel: GenderViewModel = hiltViewModel()
+    viewModel: NutrientGoalViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
@@ -53,33 +52,37 @@ fun GenderScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(id = R.string.whats_your_gender)
+                text = stringResource(id = R.string.what_are_your_nutrient_goals)
             )
             Spacer(modifier = modifier.height(spacing.spaceMedium))
-            Row {
-                SelectableButton(
-                    text = stringResource(id = R.string.male),
-                    isSelected = viewModel.selectedGender is Gender.Male,
-                    onClick = {
-                        viewModel.onEvent(GenderEvent.OnGenderEnter(Gender.Male))
-                    }
-                )
-                Spacer(
-                    modifier = modifier.width(spacing.spaceMedium)
-                )
-                SelectableButton(
-                    text = stringResource(id = R.string.female),
-                    isSelected = viewModel.selectedGender is Gender.Female,
-                    onClick = {
-                        viewModel.onEvent(GenderEvent.OnGenderEnter(Gender.Female))
-                    }
-                )
-            }
+            UnitTextField(
+                value = viewModel.state.carbsPct,
+                onValueChange = {
+                    viewModel.onEvent(NutrientGoalEvent.OnCarbPctEnter(it))
+                },
+                unit = stringResource(id = R.string.percent_carbs)
+            )
+            Spacer(modifier = modifier.height(spacing.spaceMedium))
+            UnitTextField(
+                value = viewModel.state.proteinPct,
+                onValueChange = {
+                    viewModel.onEvent(NutrientGoalEvent.OnProteinPctEnter(it))
+                },
+                unit = stringResource(id = R.string.percent_proteins)
+            )
+            Spacer(modifier = modifier.height(spacing.spaceMedium))
+            UnitTextField(
+                value = viewModel.state.fatPct,
+                onValueChange = {
+                    viewModel.onEvent(NutrientGoalEvent.OnFatPctEnter(it))
+                },
+                unit = stringResource(id = R.string.percent_fats)
+            )
         }
         ActionButton(
             text = stringResource(id = R.string.next),
             onClick = {
-                viewModel.onEvent(GenderEvent.OnNextClicked)
+                viewModel.onEvent(NutrientGoalEvent.OnNextClick)
             },
             modifier = modifier.align(Alignment.BottomEnd)
         )

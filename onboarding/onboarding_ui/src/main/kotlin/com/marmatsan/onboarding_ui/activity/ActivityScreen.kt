@@ -1,42 +1,32 @@
-package com.marmatsan.onboarding_ui.gender
+package com.marmatsan.onboarding_ui.activity
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marmatsan.core_domain.R
-import com.marmatsan.core_domain.model.Gender
+import com.marmatsan.core_domain.model.ActivityLevel
 import com.marmatsan.core_domain.util.UiEvent
 import com.marmatsan.core_ui.LocalSpacing
 import com.marmatsan.onboarding_ui.components.ActionButton
 import com.marmatsan.onboarding_ui.components.SelectableButton
 
 @Composable
-fun GenderScreen(
+fun ActivityScreen(
     modifier: Modifier = Modifier,
-    snackbarHostState: SnackbarHostState,
     onNavigate: (UiEvent.Navigate) -> Unit,
-    viewModel: GenderViewModel = hiltViewModel()
+    viewModel: ActivityViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
-    val context = LocalContext.current
 
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.Navigate -> onNavigate(event)
-                is UiEvent.ShowSnackBar -> {
-                    snackbarHostState.showSnackbar(
-                        message = event.message.asString(context)
-                    )
-                }
-
                 else -> Unit
             }
         }
@@ -53,35 +43,39 @@ fun GenderScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(id = R.string.whats_your_gender)
+                text = stringResource(id = R.string.whats_your_activity_level)
             )
             Spacer(modifier = modifier.height(spacing.spaceMedium))
             Row {
                 SelectableButton(
-                    text = stringResource(id = R.string.male),
-                    isSelected = viewModel.selectedGender is Gender.Male,
+                    text = stringResource(id = R.string.low),
+                    isSelected = viewModel.selectedActivityLevel is ActivityLevel.Low,
                     onClick = {
-                        viewModel.onEvent(GenderEvent.OnGenderEnter(Gender.Male))
+                        viewModel.onActivityLevelSelect(ActivityLevel.Low)
                     }
                 )
-                Spacer(
-                    modifier = modifier.width(spacing.spaceMedium)
-                )
+                Spacer(modifier = modifier.width(spacing.spaceMedium))
                 SelectableButton(
-                    text = stringResource(id = R.string.female),
-                    isSelected = viewModel.selectedGender is Gender.Female,
+                    text = stringResource(id = R.string.medium),
+                    isSelected = viewModel.selectedActivityLevel is ActivityLevel.Medium,
                     onClick = {
-                        viewModel.onEvent(GenderEvent.OnGenderEnter(Gender.Female))
+                        viewModel.onActivityLevelSelect(ActivityLevel.Medium)
+                    }
+                )
+                Spacer(modifier = modifier.width(spacing.spaceMedium))
+                SelectableButton(
+                    text = stringResource(id = R.string.high),
+                    isSelected = viewModel.selectedActivityLevel is ActivityLevel.High,
+                    onClick = {
+                        viewModel.onActivityLevelSelect(ActivityLevel.High)
                     }
                 )
             }
         }
         ActionButton(
             text = stringResource(id = R.string.next),
-            onClick = {
-                viewModel.onEvent(GenderEvent.OnNextClicked)
-            },
-            modifier = modifier.align(Alignment.BottomEnd)
+            onClick = viewModel::onNextClick,
+            modifier = Modifier.align(Alignment.BottomEnd)
         )
     }
 }

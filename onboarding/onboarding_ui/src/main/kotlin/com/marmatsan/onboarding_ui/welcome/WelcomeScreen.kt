@@ -17,11 +17,12 @@ import com.marmatsan.onboarding_ui.components.ActionButton
 
 @Composable
 fun WelcomeScreen(
+    modifier: Modifier = Modifier,
     onNavigate: (UiEvent.Navigate) -> Unit
 ) {
     val spacing = LocalSpacing.current
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(spacing.spaceMedium),
         verticalArrangement = Arrangement.Center,
@@ -33,10 +34,10 @@ fun WelcomeScreen(
             style = MaterialTheme.typography.titleLarge
         )
         Spacer(
-            modifier = Modifier.height(spacing.spaceMedium)
+            modifier = modifier.height(spacing.spaceMedium)
         )
         ActionButton(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
+            modifier = modifier.align(Alignment.CenterHorizontally),
             text = stringResource(id = R.string.next),
             onClick = {
                 onNavigate(UiEvent.Navigate(Route.OnBoarding.GENDER))

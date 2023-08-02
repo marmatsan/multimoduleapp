@@ -3,6 +3,7 @@ package com.marmatsan.onboarding_ui.components
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,6 +21,7 @@ fun UnitTextField(
     onValueChange: (String) -> Unit,
     unit: String,
     textStyle: TextStyle = TextStyle(
+        color = MaterialTheme.colorScheme.onBackground,
         fontSize = 70.sp
     ),
 ) {

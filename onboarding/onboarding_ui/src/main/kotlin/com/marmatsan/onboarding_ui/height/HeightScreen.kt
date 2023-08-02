@@ -1,4 +1,4 @@
-package com.marmatsan.onboarding_ui.gender
+package com.marmatsan.onboarding_ui.height
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.SnackbarHostState
@@ -11,18 +11,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marmatsan.core_domain.R
-import com.marmatsan.core_domain.model.Gender
 import com.marmatsan.core_domain.util.UiEvent
 import com.marmatsan.core_ui.LocalSpacing
 import com.marmatsan.onboarding_ui.components.ActionButton
-import com.marmatsan.onboarding_ui.components.SelectableButton
+import com.marmatsan.onboarding_ui.components.UnitTextField
 
 @Composable
-fun GenderScreen(
+fun HeightScreen(
     modifier: Modifier = Modifier,
     snackbarHostState: SnackbarHostState,
     onNavigate: (UiEvent.Navigate) -> Unit,
-    viewModel: GenderViewModel = hiltViewModel()
+    viewModel: HeightViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
@@ -31,6 +30,7 @@ fun GenderScreen(
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.Navigate -> onNavigate(event)
+
                 is UiEvent.ShowSnackBar -> {
                     snackbarHostState.showSnackbar(
                         message = event.message.asString(context)
@@ -53,34 +53,18 @@ fun GenderScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(id = R.string.whats_your_gender)
+                text = stringResource(id = R.string.whats_your_height)
             )
             Spacer(modifier = modifier.height(spacing.spaceMedium))
-            Row {
-                SelectableButton(
-                    text = stringResource(id = R.string.male),
-                    isSelected = viewModel.selectedGender is Gender.Male,
-                    onClick = {
-                        viewModel.onEvent(GenderEvent.OnGenderEnter(Gender.Male))
-                    }
-                )
-                Spacer(
-                    modifier = modifier.width(spacing.spaceMedium)
-                )
-                SelectableButton(
-                    text = stringResource(id = R.string.female),
-                    isSelected = viewModel.selectedGender is Gender.Female,
-                    onClick = {
-                        viewModel.onEvent(GenderEvent.OnGenderEnter(Gender.Female))
-                    }
-                )
-            }
+            UnitTextField(
+                value = viewModel.height,
+                onValueChange = viewModel::onHeightEnter,
+                unit = stringResource(id = R.string.cm)
+            )
         }
         ActionButton(
             text = stringResource(id = R.string.next),
-            onClick = {
-                viewModel.onEvent(GenderEvent.OnNextClicked)
-            },
+            onClick = viewModel::onNextClick,
             modifier = modifier.align(Alignment.BottomEnd)
         )
     }

@@ -31,24 +31,34 @@ class AgeViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun onAgeEnter(age: String) {
-        if (age.length <= 3) {
-            this.age = filterOutDigits(age)
-        }
-    }
-
-    fun onNextClick() {
-        viewModelScope.launch {
-            val ageNumber = age.toIntOrNull() ?: run {
-                _uiEvent.send(
-                    UiEvent.ShowSnackBar(
-                        UiText.StringResource(R.string.error_age_cant_be_empty)
-                    )
-                )
-                return@launch
+    fun onEvent(event: AgeEvent) {
+        when (event) {
+            is AgeEvent.OnAgeEnter -> {
+                if (age.length <= 3) {
+                    this.age = filterOutDigits(age)
+                }
             }
-            preferences.saveAge(ageNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.OnBoarding.HEIGHT))
+
+            is AgeEvent.OnBackClicked -> {
+                viewModelScope.launch {
+                    _uiEvent.send(UiEvent.NavigateBack)
+                }
+            }
+
+            is AgeEvent.OnNextClicked -> {
+                viewModelScope.launch {
+                    val ageNumber = age.toIntOrNull() ?: run {
+                        _uiEvent.send(
+                            UiEvent.ShowSnackBar(
+                                UiText.StringResource(R.string.error_age_cant_be_empty)
+                            )
+                        )
+                        return@launch
+                    }
+                    preferences.saveAge(ageNumber)
+                    _uiEvent.send(UiEvent.Navigate(Route.OnBoarding.HEIGHT))
+                }
+            }
         }
     }
 }

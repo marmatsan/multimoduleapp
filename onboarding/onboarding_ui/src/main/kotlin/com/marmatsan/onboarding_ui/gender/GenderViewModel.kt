@@ -9,15 +9,18 @@ import com.marmatsan.core_domain.model.Gender
 import com.marmatsan.core_domain.navigation.Route
 import com.marmatsan.core_domain.preferences.Preferences
 import com.marmatsan.core_domain.util.UiEvent
+import com.marmatsan.core_domain.util.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import onboarding_domain.use_case.ValidateGender
 import javax.inject.Inject
 
 @HiltViewModel
 class GenderViewModel @Inject constructor(
-    private val preferences: Preferences
+    private val preferences: Preferences,
+    private val validateGender: ValidateGender
 ) : ViewModel() {
 
     var selectedGender by mutableStateOf<Gender>(Gender.Unknown)
@@ -26,14 +29,30 @@ class GenderViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun onGenderClick(gender: Gender) {
-        selectedGender = gender
-    }
+    fun onEvent(event: GenderEvent) {
+        when (event) {
+            is GenderEvent.OnGenderEnter -> {
+                selectedGender = event.gender
+            }
 
-    fun onNextClick() {
-        viewModelScope.launch {
-            preferences.saveGender(selectedGender)
-            _uiEvent.send(UiEvent.Navigate(Route.OnBoarding.AGE))
+            is GenderEvent.OnNextClicked -> {
+                val result = validateGender(selectedGender)
+
+                when (result) {
+                    is ValidateGender.Result.Success -> {
+                        viewModelScope.launch {
+                            preferences.saveGender(selectedGender)
+                            _uiEvent.send(UiEvent.Navigate(Route.OnBoarding.AGE))
+                        }
+                    }
+
+                    is ValidateGender.Result.Error -> {
+                        viewModelScope.launch {
+                            _uiEvent.send(UiEvent.ShowSnackBar(message = result.message))
+                        }
+                    }
+                }
+            }
         }
     }
 }

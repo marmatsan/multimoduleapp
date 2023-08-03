@@ -3,7 +3,7 @@ package com.marmatsan.core_data.preferences
 import androidx.datastore.core.DataStore
 import com.marmatsan.core_domain.model.ActivityLevel
 import com.marmatsan.core_domain.model.Gender
-import com.marmatsan.core_domain.model.Goal
+import com.marmatsan.core_domain.model.WeightGoal
 import com.marmatsan.core_domain.model.UserInfo
 import com.marmatsan.core_domain.preferences.Preferences
 import kotlinx.coroutines.flow.Flow
@@ -53,10 +53,10 @@ class DefaultPreferences @Inject constructor(
         }
     }
 
-    override suspend fun saveGoalType(goal: Goal) {
+    override suspend fun saveGoalType(weightGoal: WeightGoal) {
         dataStore.updateData {
             it.copy(
-                goal = goal,
+                weightGoal = weightGoal,
             )
         }
     }

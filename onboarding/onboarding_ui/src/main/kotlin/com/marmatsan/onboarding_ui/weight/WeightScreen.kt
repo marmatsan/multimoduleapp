@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marmatsan.core_domain.R
 import com.marmatsan.core_domain.util.UiEvent
@@ -21,9 +22,9 @@ fun WeightScreen(
     modifier: Modifier = Modifier,
     snackbarHostState: SnackbarHostState,
     onNavigate: (UiEvent.Navigate) -> Unit,
+    onNavigateBack : () -> Unit,
     viewModel: WeightViewModel = hiltViewModel()
 ) {
-    val spacing = LocalSpacing.current
     val context = LocalContext.current
 
     LaunchedEffect(key1 = true) {
@@ -37,18 +38,48 @@ fun WeightScreen(
                     )
                 }
 
+                is UiEvent.NavigateBack -> onNavigateBack()
+
                 else -> Unit
             }
         }
     }
 
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(spacing.spaceLarge)
+    WeightScreenContent(
+        modifier = modifier,
+        weight = viewModel.weight,
+        onWeightEnter = {
+            viewModel.onEvent(WeightEvent.OnWeightEnter(it))
+        },
+        onBackClicked = {
+            viewModel.onEvent(WeightEvent.OnBackClicked)
+        },
+        onNextClicked = {
+            viewModel.onEvent(WeightEvent.OnNextClicked)
+        }
+    )
+
+}
+
+@Composable
+fun WeightScreenContent(
+    modifier: Modifier = Modifier,
+    weight: String,
+    onWeightEnter: (String) -> Unit,
+    onBackClicked: () -> Unit,
+    onNextClicked: () -> Unit
+) {
+    val spacing = LocalSpacing.current
+
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column(
-            modifier = modifier.fillMaxSize(),
+            modifier = modifier
+                .fillMaxWidth()
+                .weight(9f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -57,15 +88,43 @@ fun WeightScreen(
             )
             Spacer(modifier = modifier.height(spacing.spaceMedium))
             UnitTextField(
-                value = viewModel.weight,
-                onValueChange = viewModel::onWeightEnter,
+                value = weight,
+                onValueChange = {
+                    onWeightEnter(it)
+                },
                 unit = stringResource(id = R.string.kg)
             )
         }
-        ActionButton(
-            text = stringResource(id = R.string.next),
-            onClick = viewModel::onNextClick,
-            modifier = modifier.align(Alignment.BottomEnd)
-        )
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(spacing.spaceMedium)
+                .weight(1f),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            ActionButton(
+                text = stringResource(id = R.string.back),
+                onClick = {
+                    onBackClicked()
+                }
+            )
+            ActionButton(
+                text = stringResource(id = R.string.next),
+                onClick = {
+                    onNextClicked()
+                }
+            )
+        }
     }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFF)
+@Composable
+fun WeightScreenContentPreview() {
+    WeightScreenContent(
+        weight = "80.0",
+        onWeightEnter = { },
+        onBackClicked = { },
+        onNextClicked = { }
+    )
 }

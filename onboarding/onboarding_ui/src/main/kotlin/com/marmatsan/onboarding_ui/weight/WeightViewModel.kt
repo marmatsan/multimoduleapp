@@ -29,24 +29,34 @@ class WeightViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun onWeightEnter(weight: String) {
-        if (weight.length <= 5) {
-            this.weight = filterOutWeight(weight)
-        }
-    }
-
-    fun onNextClick() {
-        viewModelScope.launch {
-            val weightNumber = weight.toFloatOrNull() ?: run {
-                _uiEvent.send(
-                    UiEvent.ShowSnackBar(
-                        UiText.StringResource(R.string.error_weight_cant_be_empty)
-                    )
-                )
-                return@launch
+    fun onEvent(event: WeightEvent) {
+        when (event) {
+            is WeightEvent.OnWeightEnter -> {
+                if (weight.length <= 5) {
+                    this.weight = filterOutWeight(event.weight)
+                }
             }
-            preferences.saveWeight(weightNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.OnBoarding.ACTIVITY))
+
+            is WeightEvent.OnBackClicked -> {
+                viewModelScope.launch {
+                    _uiEvent.send(UiEvent.NavigateBack)
+                }
+            }
+
+            is WeightEvent.OnNextClicked -> {
+                viewModelScope.launch {
+                    val weightNumber = weight.toFloatOrNull() ?: run {
+                        _uiEvent.send(
+                            UiEvent.ShowSnackBar(
+                                UiText.StringResource(R.string.error_weight_cant_be_empty)
+                            )
+                        )
+                        return@launch
+                    }
+                    preferences.saveWeight(weightNumber)
+                    _uiEvent.send(UiEvent.Navigate(Route.OnBoarding.ACTIVITY))
+                }
+            }
         }
     }
 }

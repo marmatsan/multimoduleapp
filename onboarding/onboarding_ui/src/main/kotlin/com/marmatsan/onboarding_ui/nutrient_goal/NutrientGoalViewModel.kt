@@ -49,6 +49,12 @@ class NutrientGoalViewModel @Inject constructor(
                 )
             }
 
+            NutrientGoalEvent.OnBackClick -> {
+                viewModelScope.launch {
+                    _uiEvent.send(UiEvent.NavigateBack)
+                }
+            }
+
             is NutrientGoalEvent.OnNextClick -> {
                 val result = validateNutrients(
                     carbsPctText = state.carbsPct,
@@ -72,6 +78,7 @@ class NutrientGoalViewModel @Inject constructor(
                     }
                 }
             }
+
         }
     }
 }

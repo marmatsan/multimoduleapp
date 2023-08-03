@@ -20,7 +20,7 @@ import com.marmatsan.multimoduleapp.ui.theme.MultiLayerAppTheme
 import com.marmatsan.onboarding_ui.activity.ActivityScreen
 import com.marmatsan.onboarding_ui.age.AgeScreen
 import com.marmatsan.onboarding_ui.gender.GenderScreen
-import com.marmatsan.onboarding_ui.goal.GoalScreen
+import com.marmatsan.onboarding_ui.weight_goal.GoalScreen
 import com.marmatsan.onboarding_ui.height.HeightScreen
 import com.marmatsan.onboarding_ui.nutrient_goal.NutrientGoalScreen
 import com.marmatsan.onboarding_ui.weight.WeightScreen
@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
                         composable(Route.OnBoarding.WELCOME) {
                             WelcomeScreen(
                                 modifier = Modifier.padding(paddingValues),
-                                onNavigate = navController::navigate
+                                onNavigate = navController::navigate,
                             )
                         }
                         composable(Route.OnBoarding.GENDER) {
@@ -70,26 +70,30 @@ class MainActivity : ComponentActivity() {
                             HeightScreen(
                                 modifier = Modifier.padding(paddingValues),
                                 snackbarHostState = snackbarHostState,
-                                onNavigate = navController::navigate
+                                onNavigate = navController::navigate,
+                                onNavigateBack = navController::navigateBack
                             )
                         }
                         composable(Route.OnBoarding.WEIGHT) {
                             WeightScreen(
                                 modifier = Modifier.padding(paddingValues),
                                 snackbarHostState = snackbarHostState,
-                                onNavigate = navController::navigate
+                                onNavigate = navController::navigate,
+                                onNavigateBack = navController::navigateBack
                             )
                         }
                         composable(Route.OnBoarding.ACTIVITY) {
                             ActivityScreen(
                                 modifier = Modifier.padding(paddingValues),
-                                onNavigate = navController::navigate
+                                onNavigate = navController::navigate,
+                                onNavigateBack = navController::navigateBack
                             )
                         }
-                        composable(Route.OnBoarding.GOAL) {
+                        composable(Route.OnBoarding.WEIGHT_GOAL) {
                             GoalScreen(
                                 modifier = Modifier.padding(paddingValues),
-                                onNavigate = navController::navigate
+                                onNavigate = navController::navigate,
+                                onNavigateBack = navController::navigateBack
                             )
                         }
                         composable(Route.OnBoarding.NUTRIENT_GOAL) {

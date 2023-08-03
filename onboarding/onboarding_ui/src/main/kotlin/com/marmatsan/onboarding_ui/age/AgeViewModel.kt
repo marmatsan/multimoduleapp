@@ -25,7 +25,7 @@ class AgeViewModel @Inject constructor(
     private val filterOutDigits: FilterOutDigits
 ) : ViewModel() {
 
-    var age by mutableStateOf("20")
+    var age by mutableStateOf<String>("20")
         private set
 
     private val _uiEvent = Channel<UiEvent>()
@@ -35,7 +35,7 @@ class AgeViewModel @Inject constructor(
         when (event) {
             is AgeEvent.OnAgeEnter -> {
                 if (age.length <= 3) {
-                    this.age = filterOutDigits(age)
+                    this.age = filterOutDigits(event.age)
                 }
             }
 

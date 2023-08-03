@@ -36,9 +36,7 @@ class GenderViewModel @Inject constructor(
             }
 
             is GenderEvent.OnNextClicked -> {
-                val result = validateGender(selectedGender)
-
-                when (result) {
+                when (val result = validateGender(selectedGender)) {
                     is ValidateGender.Result.Success -> {
                         viewModelScope.launch {
                             preferences.saveGender(selectedGender)

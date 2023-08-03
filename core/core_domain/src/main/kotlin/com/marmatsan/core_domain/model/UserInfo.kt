@@ -9,7 +9,7 @@ data class UserInfo(
     val weight: Float? = null,
     val height: Int? = null,
     val activityLevel: ActivityLevel? = null,
-    val goal: Goal? = null,
+    val weightGoal: WeightGoal? = null,
     val carbRatio: Float? = null,
     val proteinRatio: Float? = null,
     val fatRatio: Float? = null

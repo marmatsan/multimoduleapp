@@ -25,30 +25,40 @@ class HeightViewModel @Inject constructor(
     private val filterOutDigits: FilterOutDigits
 ) : ViewModel() {
 
-    var height by mutableStateOf("140")
+    var height by mutableStateOf<String>("140")
         private set
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun onHeightEnter(height: String) {
-        if (height.length <= 3) {
-            this.height = filterOutDigits(height)
-        }
-    }
-
-    fun onNextClick() {
-        viewModelScope.launch {
-            val heightNumber = height.toIntOrNull() ?: run {
-                _uiEvent.send(
-                    UiEvent.ShowSnackBar(
-                        UiText.StringResource(R.string.error_height_cant_be_empty)
-                    )
-                )
-                return@launch
+    fun onEvent(event: HeightEvent) {
+        when (event) {
+            is HeightEvent.OnHeightEnter -> {
+                if (height.length <= 3) {
+                    this.height = filterOutDigits(event.height)
+                }
             }
-            preferences.saveAge(heightNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.OnBoarding.WEIGHT))
+
+            is HeightEvent.OnBackClicked -> {
+                viewModelScope.launch {
+                    _uiEvent.send(UiEvent.NavigateBack)
+                }
+            }
+
+            is HeightEvent.OnNextClicked -> {
+                viewModelScope.launch {
+                    val heightNumber = height.toIntOrNull() ?: run {
+                        _uiEvent.send(
+                            UiEvent.ShowSnackBar(
+                                UiText.StringResource(R.string.error_height_cant_be_empty)
+                            )
+                        )
+                        return@launch
+                    }
+                    preferences.saveAge(heightNumber)
+                    _uiEvent.send(UiEvent.Navigate(Route.OnBoarding.WEIGHT))
+                }
+            }
         }
     }
 }

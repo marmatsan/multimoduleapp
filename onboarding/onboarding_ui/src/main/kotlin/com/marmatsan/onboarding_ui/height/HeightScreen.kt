@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marmatsan.core_domain.R
 import com.marmatsan.core_domain.util.UiEvent
@@ -21,9 +22,9 @@ fun HeightScreen(
     modifier: Modifier = Modifier,
     snackbarHostState: SnackbarHostState,
     onNavigate: (UiEvent.Navigate) -> Unit,
+    onNavigateBack: () -> Unit,
     viewModel: HeightViewModel = hiltViewModel()
 ) {
-    val spacing = LocalSpacing.current
     val context = LocalContext.current
 
     LaunchedEffect(key1 = true) {
@@ -37,18 +38,47 @@ fun HeightScreen(
                     )
                 }
 
+                is UiEvent.NavigateBack -> onNavigateBack()
+
                 else -> Unit
             }
         }
     }
 
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(spacing.spaceLarge)
+    HeightScreenContent(
+        modifier = modifier,
+        height = viewModel.height,
+        onHeightEnter = {
+            viewModel.onEvent(HeightEvent.OnHeightEnter(it))
+        },
+        onBackClicked = {
+            viewModel.onEvent(HeightEvent.OnBackClicked)
+        },
+        onNextClicked = {
+            viewModel.onEvent(HeightEvent.OnNextClicked)
+        }
+    )
+}
+
+@Composable
+fun HeightScreenContent(
+    modifier: Modifier = Modifier,
+    height: String,
+    onHeightEnter: (String) -> Unit,
+    onBackClicked: () -> Unit,
+    onNextClicked: () -> Unit
+) {
+    val spacing = LocalSpacing.current
+
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column(
-            modifier = modifier.fillMaxSize(),
+            modifier = modifier
+                .fillMaxWidth()
+                .weight(9f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -57,15 +87,43 @@ fun HeightScreen(
             )
             Spacer(modifier = modifier.height(spacing.spaceMedium))
             UnitTextField(
-                value = viewModel.height,
-                onValueChange = viewModel::onHeightEnter,
+                value = height,
+                onValueChange = {
+                    onHeightEnter(it)
+                },
                 unit = stringResource(id = R.string.cm)
             )
         }
-        ActionButton(
-            text = stringResource(id = R.string.next),
-            onClick = viewModel::onNextClick,
-            modifier = modifier.align(Alignment.BottomEnd)
-        )
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(spacing.spaceMedium)
+                .weight(1f),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            ActionButton(
+                text = stringResource(id = R.string.back),
+                onClick = {
+                    onBackClicked()
+                }
+            )
+            ActionButton(
+                text = stringResource(id = R.string.next),
+                onClick = {
+                    onNextClicked()
+                }
+            )
+        }
     }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFF)
+@Composable
+fun HeightScreenContentPreview() {
+    HeightScreenContent(
+        height = "140",
+        onHeightEnter = { },
+        onBackClicked = { },
+        onNextClicked = { }
+    )
 }

@@ -8,9 +8,9 @@ object Route {
         const val GENDER = "gender"
         const val HEIGHT = "height"
         const val WEIGHT = "weight"
-        const val NUTRIENT_GOAL = "nutrient_goal"
+        const val WEIGHT_GOAL = "weight_goal"
         const val ACTIVITY = "activity"
-        const val GOAL = "goal"
+        const val NUTRIENT_GOAL = "nutrient_goal"
     }
 
     object Tracker {

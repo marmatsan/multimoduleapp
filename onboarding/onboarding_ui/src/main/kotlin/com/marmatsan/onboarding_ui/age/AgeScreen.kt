@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marmatsan.core_domain.R
 import com.marmatsan.core_domain.util.UiEvent
@@ -26,7 +25,6 @@ fun AgeScreen(
     onNavigateBack: () -> Unit,
     viewModel: AgeViewModel = hiltViewModel()
 ) {
-    val spacing = LocalSpacing.current
     val context = LocalContext.current
 
     LaunchedEffect(key1 = true) {
@@ -49,14 +47,41 @@ fun AgeScreen(
         }
     }
 
+    AgeScreenContent(
+        modifier = modifier,
+        age = viewModel.age,
+        onAgeEnter = {
+            viewModel.onEvent(AgeEvent.OnAgeEnter(it))
+        },
+        onBackClicked = {
+            viewModel.onEvent(AgeEvent.OnBackClicked)
+        },
+        onNextClicked = {
+            viewModel.onEvent(AgeEvent.OnNextClicked)
+        }
+    )
+
+}
+
+@Composable
+fun AgeScreenContent(
+    modifier: Modifier = Modifier,
+    age: String,
+    onAgeEnter: (String) -> Unit,
+    onBackClicked: () -> Unit,
+    onNextClicked: () -> Unit
+) {
+    val spacing = LocalSpacing.current
+
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(spacing.spaceLarge),
-        verticalArrangement = Arrangement.SpaceBetween
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column(
-            modifier = modifier.fillMaxSize(),
+            modifier = modifier
+                .fillMaxWidth()
+                .weight(9f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -65,29 +90,43 @@ fun AgeScreen(
             )
             Spacer(modifier = modifier.height(spacing.spaceMedium))
             UnitTextField(
-                value = viewModel.age,
+                value = age,
                 onValueChange = {
-                    viewModel.onEvent(AgeEvent.OnAgeEnter(it))
+                    onAgeEnter(it)
                 },
                 unit = stringResource(id = R.string.years)
             )
         }
         Row(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(spacing.spaceMedium)
+                .weight(1f),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             ActionButton(
                 text = stringResource(id = R.string.back),
                 onClick = {
-                    viewModel.onEvent(AgeEvent.OnBackClicked)
+                    onBackClicked()
                 }
             )
             ActionButton(
                 text = stringResource(id = R.string.next),
                 onClick = {
-                    viewModel.onEvent(AgeEvent.OnNextClicked)
+                    onNextClicked()
                 }
             )
         }
     }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Composable
+fun AgeScreenContentPreview() {
+    AgeScreenContent(
+        age = "20",
+        onAgeEnter = { },
+        onBackClicked = { },
+        onNextClicked = { }
+    )
 }

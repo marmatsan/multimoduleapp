@@ -1,4 +1,4 @@
-package com.marmatsan.onboarding_ui.activity
+package com.marmatsan.onboarding_ui.weight_goal
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
@@ -10,20 +10,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marmatsan.core_domain.R
-import com.marmatsan.core_domain.model.ActivityLevel
-import com.marmatsan.core_domain.model.Gender
+import com.marmatsan.core_domain.model.WeightGoal
 import com.marmatsan.core_domain.util.UiEvent
 import com.marmatsan.core_ui.LocalSpacing
 import com.marmatsan.onboarding_ui.components.ActionButton
 import com.marmatsan.onboarding_ui.components.SelectableButton
-import com.marmatsan.onboarding_ui.components.UnitTextField
 
 @Composable
-fun ActivityScreen(
+fun GoalScreen(
     modifier: Modifier = Modifier,
     onNavigate: (UiEvent.Navigate) -> Unit,
     onNavigateBack: () -> Unit,
-    viewModel: ActivityViewModel = hiltViewModel()
+    viewModel: GoalViewModel = hiltViewModel()
 ) {
 
     LaunchedEffect(key1 = true) {
@@ -36,26 +34,26 @@ fun ActivityScreen(
         }
     }
 
-    ActivityScreenContent(
+    GoalScreenContent(
         modifier = modifier,
-        selectedActivityLevel = viewModel.selectedActivityLevel,
-        onActivityLeveEnter = {
-            viewModel.onEvent(ActivityEvent.OnActivityLevelEnter(it))
+        selectedWeightGoal = viewModel.selectedWeightGoal,
+        onGoalEnter = {
+            viewModel.onEvent(WeightGoalEvent.OnWeightGoalEnter(it))
         },
         onNextClick = {
-            viewModel.onEvent(ActivityEvent.OnNextClicked)
+            viewModel.onEvent(WeightGoalEvent.OnNextClicked)
         },
         onBackClick = {
-            viewModel.onEvent(ActivityEvent.OnBackClicked)
+            viewModel.onEvent(WeightGoalEvent.OnBackClicked)
         }
     )
 }
 
 @Composable
-fun ActivityScreenContent(
+fun GoalScreenContent(
     modifier: Modifier = Modifier,
-    selectedActivityLevel: ActivityLevel,
-    onActivityLeveEnter: (ActivityLevel) -> Unit,
+    selectedWeightGoal: WeightGoal,
+    onGoalEnter: (WeightGoal) -> Unit,
     onNextClick: () -> Unit,
     onBackClick: () -> Unit
 ) {
@@ -79,35 +77,35 @@ fun ActivityScreenContent(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = stringResource(id = R.string.whats_your_activity_level)
+                    text = stringResource(id = R.string.lose_keep_or_gain_weight)
                 )
                 Spacer(modifier = modifier.height(spacing.spaceMedium))
                 Row {
                     SelectableButton(
-                        text = stringResource(id = R.string.low),
-                        isSelected = selectedActivityLevel is ActivityLevel.Low,
+                        text = stringResource(id = R.string.lose),
+                        isSelected = selectedWeightGoal is WeightGoal.LoseWeight,
                         onClick = {
-                            onActivityLeveEnter(ActivityLevel.Low)
+                            onGoalEnter(WeightGoal.LoseWeight)
                         }
                     )
                     Spacer(
                         modifier = modifier.width(spacing.spaceMedium)
                     )
                     SelectableButton(
-                        text = stringResource(id = R.string.medium),
-                        isSelected = selectedActivityLevel is ActivityLevel.Medium,
+                        text = stringResource(id = R.string.keep),
+                        isSelected = selectedWeightGoal is WeightGoal.KeepWeight,
                         onClick = {
-                            onActivityLeveEnter(ActivityLevel.Medium)
+                            onGoalEnter(WeightGoal.KeepWeight)
                         }
                     )
                     Spacer(
                         modifier = modifier.width(spacing.spaceMedium)
                     )
                     SelectableButton(
-                        text = stringResource(id = R.string.high),
-                        isSelected = selectedActivityLevel is ActivityLevel.High,
+                        text = stringResource(id = R.string.gain),
+                        isSelected = selectedWeightGoal is WeightGoal.GainWeight,
                         onClick = {
-                            onActivityLeveEnter(ActivityLevel.High)
+                            onGoalEnter(WeightGoal.GainWeight)
                         }
                     )
                 }
@@ -138,10 +136,10 @@ fun ActivityScreenContent(
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
-fun ActivityScreenContentPreview() {
-    ActivityScreenContent(
-        selectedActivityLevel = ActivityLevel.Medium,
-        onActivityLeveEnter = { },
+fun GoalScreenContentPreview() {
+    GoalScreenContent(
+        selectedWeightGoal = WeightGoal.KeepWeight,
+        onGoalEnter = { },
         onNextClick = { },
         onBackClick = { }
     )

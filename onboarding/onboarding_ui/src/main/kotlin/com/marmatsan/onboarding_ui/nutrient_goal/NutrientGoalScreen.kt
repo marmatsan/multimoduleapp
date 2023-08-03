@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marmatsan.core_domain.R
 import com.marmatsan.core_domain.util.UiEvent
@@ -23,7 +24,6 @@ fun NutrientGoalScreen(
     onNavigate: (UiEvent.Navigate) -> Unit,
     viewModel: NutrientGoalViewModel = hiltViewModel()
 ) {
-    val spacing = LocalSpacing.current
     val context = LocalContext.current
 
     LaunchedEffect(key1 = true) {
@@ -41,13 +41,48 @@ fun NutrientGoalScreen(
         }
     }
 
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(spacing.spaceLarge)
+    NutrientGoalContent(
+        modifier = modifier,
+        state = viewModel.state,
+        onCarbPctEnter = {
+            viewModel.onEvent(NutrientGoalEvent.OnCarbPctEnter(it))
+        },
+        onProteinPctEnter = {
+            viewModel.onEvent(NutrientGoalEvent.OnProteinPctEnter(it))
+        },
+        onFatPctEnter = {
+            viewModel.onEvent(NutrientGoalEvent.OnFatPctEnter(it))
+        },
+        onBackClicked = {
+            viewModel.onEvent(NutrientGoalEvent.OnBackClick)
+        },
+        onNextClicked = {
+            viewModel.onEvent(NutrientGoalEvent.OnNextClick)
+        }
+    )
+}
+
+@Composable
+fun NutrientGoalContent(
+    modifier: Modifier = Modifier,
+    state: NutrientGoalState,
+    onCarbPctEnter: (String) -> Unit,
+    onProteinPctEnter: (String) -> Unit,
+    onFatPctEnter: (String) -> Unit,
+    onBackClicked: () -> Unit,
+    onNextClicked: () -> Unit
+) {
+    val spacing = LocalSpacing.current
+
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column(
-            modifier = modifier.fillMaxSize(),
+            modifier = modifier
+                .fillMaxWidth()
+                .weight(9f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -56,35 +91,61 @@ fun NutrientGoalScreen(
             )
             Spacer(modifier = modifier.height(spacing.spaceMedium))
             UnitTextField(
-                value = viewModel.state.carbsPct,
+                value = state.carbsPct,
                 onValueChange = {
-                    viewModel.onEvent(NutrientGoalEvent.OnCarbPctEnter(it))
+                    onCarbPctEnter(it)
                 },
                 unit = stringResource(id = R.string.percent_carbs)
             )
             Spacer(modifier = modifier.height(spacing.spaceMedium))
             UnitTextField(
-                value = viewModel.state.proteinPct,
+                value = state.proteinPct,
                 onValueChange = {
-                    viewModel.onEvent(NutrientGoalEvent.OnProteinPctEnter(it))
+                    onProteinPctEnter(it)
                 },
                 unit = stringResource(id = R.string.percent_proteins)
             )
             Spacer(modifier = modifier.height(spacing.spaceMedium))
             UnitTextField(
-                value = viewModel.state.fatPct,
+                value = state.fatPct,
                 onValueChange = {
-                    viewModel.onEvent(NutrientGoalEvent.OnFatPctEnter(it))
+                    onFatPctEnter(it)
                 },
                 unit = stringResource(id = R.string.percent_fats)
             )
         }
-        ActionButton(
-            text = stringResource(id = R.string.next),
-            onClick = {
-                viewModel.onEvent(NutrientGoalEvent.OnNextClick)
-            },
-            modifier = modifier.align(Alignment.BottomEnd)
-        )
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(spacing.spaceMedium)
+                .weight(1f),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            ActionButton(
+                text = stringResource(id = R.string.back),
+                onClick = {
+                    onBackClicked()
+                }
+            )
+            ActionButton(
+                text = stringResource(id = R.string.next),
+                onClick = {
+                    onNextClicked()
+                }
+            )
+        }
     }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Composable
+fun NutrientGoalContentPreview() {
+    NutrientGoalContent(
+        state = NutrientGoalState(),
+        onCarbPctEnter = { },
+        onProteinPctEnter = { },
+        onFatPctEnter = { },
+        onBackClicked = { },
+        onNextClicked = { }
+    )
 }

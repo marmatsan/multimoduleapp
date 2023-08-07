@@ -6,6 +6,5 @@ interface OpenFoodApi {
     suspend fun searchFood(
         page: Int,
         pageSize: Int,
-        query: String,
     ): SearchDataDto
 }

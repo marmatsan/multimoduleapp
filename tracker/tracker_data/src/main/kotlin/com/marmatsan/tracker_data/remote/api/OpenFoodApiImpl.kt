@@ -1,5 +1,6 @@
 package com.marmatsan.tracker_data.remote.api
 
+import com.marmatsan.tracker_data.BuildConfig
 import com.marmatsan.tracker_data.util.ErrorState
 import com.marmatsan.tracker_data.remote.dto.SearchDataDto
 import io.ktor.client.*
@@ -14,15 +15,14 @@ class OpenFoodApiImpl @Inject constructor(
     override suspend fun searchFood(
         page: Int,
         pageSize: Int,
-        query: String
     ): SearchDataDto {
         return try {
             httpClient.get {
-
+                url(BuildConfig.BASE_URL.plus("/cgi/search.pl?json=true&action=process&fields=product_name,nutriments,image_front_thumb_url&page=1&page_size=20"))
             }.body()
         } catch (e: ErrorState) {
             e.printStackTrace()
-
+            throw ErrorState.ErroneousSearch()
         }
     }
 

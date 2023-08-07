@@ -25,6 +25,7 @@ import com.marmatsan.onboarding_ui.height.HeightScreen
 import com.marmatsan.onboarding_ui.nutrient_goal.NutrientGoalScreen
 import com.marmatsan.onboarding_ui.weight.WeightScreen
 import com.marmatsan.onboarding_ui.welcome.WelcomeScreen
+import com.marmatsan.tracker_ui.search.SearchScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,10 +47,13 @@ class MainActivity : ComponentActivity() {
                         startDestination = Route.OnBoarding.WELCOME
                     ) {
                         composable(Route.OnBoarding.WELCOME) {
+                            SearchScreen() // TODO: Change
+                            /*
                             WelcomeScreen(
                                 modifier = Modifier.padding(paddingValues),
                                 onNavigate = navController::navigate,
                             )
+                             */
                         }
                         composable(Route.OnBoarding.GENDER) {
                             GenderScreen(

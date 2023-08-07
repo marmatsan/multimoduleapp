@@ -1,20 +1,15 @@
 package com.marmatsan.tracker_data.di
 
-
 import com.marmatsan.tracker_data.remote.api.OpenFoodApi
 import com.marmatsan.tracker_data.remote.api.OpenFoodApiImpl
-import com.marmatsan.tracker_data.remote.dto.SearchDataDto
 import com.marmatsan.tracker_data.repository.TrackerRepositoryImpl
-import com.marmatsan.tracker_data.util.ErrorState
 import com.marmatsan.tracker_domain.repository.TrackerRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.ktor.client.*
-import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
-import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.serialization.kotlinx.json.*
@@ -38,20 +33,7 @@ object TrackerDataModule {
                     explicitNulls = false
                 })
             }
-            HttpResponseValidator {
-                validateResponse { response ->
-                    try { // TODO: Improve
-                        val searchDto: SearchDataDto = response.body()
-
-                        if (searchDto.products.isEmpty()) {
-                            throw ErrorState.EmptySearch()
-                        }
-
-                    } catch (e: NoTransformationFoundException) {
-                        e.printStackTrace()
-                    }
-                }
-            }
+            // TODO: Add HttpResponseValidator at some point: https://ktor.io/docs/response-validation.html
         }
     }
 

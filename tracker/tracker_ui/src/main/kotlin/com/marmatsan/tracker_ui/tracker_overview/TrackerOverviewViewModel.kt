@@ -1,4 +1,4 @@
-package com.marmatsan.tracker_ui.search
+package com.marmatsan.tracker_ui.tracker_overview
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModel @Inject constructor(
+class TrackerOverviewViewModel @Inject constructor(
     private val trackerUseCases: TrackerUseCases
 ) : ViewModel() {
     fun executeSearch() {

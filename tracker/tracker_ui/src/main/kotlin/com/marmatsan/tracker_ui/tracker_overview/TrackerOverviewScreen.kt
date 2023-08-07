@@ -1,4 +1,4 @@
-package com.marmatsan.tracker_ui.search
+package com.marmatsan.tracker_ui.tracker_overview
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,16 +11,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun SearchScreen(
-    viewModel: SearchViewModel = hiltViewModel()
+fun TrackerOverviewScreen(
+    viewModel: TrackerOverviewViewModel = hiltViewModel()
 ) {
-    SearchScreenContent(
+    TrackerOverviewScreenContent(
         onExecuteSearch = viewModel::executeSearch
     )
 }
 
 @Composable
-fun SearchScreenContent(
+fun TrackerOverviewScreenContent(
     onExecuteSearch: () -> Unit
 ) {
     Box(
@@ -39,8 +39,8 @@ fun SearchScreenContent(
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
-fun SearchScreenContentPreview() {
-    SearchScreenContent(
+fun TrackerOverviewScreenContentPreview() {
+    TrackerOverviewScreenContent(
         onExecuteSearch = { }
     )
 }

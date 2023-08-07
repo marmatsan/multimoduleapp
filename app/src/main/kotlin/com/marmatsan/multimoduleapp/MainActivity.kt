@@ -20,12 +20,12 @@ import com.marmatsan.multimoduleapp.ui.theme.MultiLayerAppTheme
 import com.marmatsan.onboarding_ui.activity.ActivityScreen
 import com.marmatsan.onboarding_ui.age.AgeScreen
 import com.marmatsan.onboarding_ui.gender.GenderScreen
-import com.marmatsan.onboarding_ui.weight_goal.GoalScreen
 import com.marmatsan.onboarding_ui.height.HeightScreen
 import com.marmatsan.onboarding_ui.nutrient_goal.NutrientGoalScreen
 import com.marmatsan.onboarding_ui.weight.WeightScreen
+import com.marmatsan.onboarding_ui.weight_goal.GoalScreen
 import com.marmatsan.onboarding_ui.welcome.WelcomeScreen
-import com.marmatsan.tracker_ui.search.SearchScreen
+import com.marmatsan.tracker_ui.tracker_overview.TrackerOverviewScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,9 +34,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MultiLayerAppTheme {
-
                 val snackbarHostState = remember { SnackbarHostState() }
-
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     snackbarHost = { SnackbarHost(snackbarHostState) }
@@ -47,13 +45,10 @@ class MainActivity : ComponentActivity() {
                         startDestination = Route.OnBoarding.WELCOME
                     ) {
                         composable(Route.OnBoarding.WELCOME) {
-                            SearchScreen() // TODO: Change
-                            /*
                             WelcomeScreen(
                                 modifier = Modifier.padding(paddingValues),
                                 onNavigate = navController::navigate,
                             )
-                             */
                         }
                         composable(Route.OnBoarding.GENDER) {
                             GenderScreen(
@@ -108,7 +103,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(Route.Tracker.OVERVIEW) {
-
+                            TrackerOverviewScreen()
                         }
                         composable(Route.Tracker.SEARCH) {
 

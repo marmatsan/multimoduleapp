@@ -6,17 +6,20 @@ import com.marmatsan.core_domain.model.Gender
 import com.marmatsan.core_domain.model.WeightGoal
 import com.marmatsan.core_domain.model.UserInfo
 import com.marmatsan.core_domain.preferences.Preferences
+import com.marmatsan.core_domain.preferences.PreferencesData
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class DefaultPreferences @Inject constructor(
-    private val dataStore: DataStore<UserInfo>
+    private val dataStore: DataStore<PreferencesData>
 ) : Preferences {
 
     override suspend fun saveGender(gender: Gender) {
         dataStore.updateData {
             it.copy(
-                gender = gender,
+                userInfo = it.userInfo.copy(
+                    gender = gender
+                )
             )
         }
     }
@@ -24,7 +27,9 @@ class DefaultPreferences @Inject constructor(
     override suspend fun saveAge(age: Int) {
         dataStore.updateData {
             it.copy(
-                age = age,
+                userInfo = it.userInfo.copy(
+                    age = age
+                )
             )
         }
     }
@@ -32,7 +37,9 @@ class DefaultPreferences @Inject constructor(
     override suspend fun saveWeight(weight: Float) {
         dataStore.updateData {
             it.copy(
-                weight = weight,
+                userInfo = it.userInfo.copy(
+                    weight = weight
+                )
             )
         }
     }
@@ -40,7 +47,9 @@ class DefaultPreferences @Inject constructor(
     override suspend fun saveHeight(height: Int) {
         dataStore.updateData {
             it.copy(
-                height = height,
+                userInfo = it.userInfo.copy(
+                    height = height
+                )
             )
         }
     }
@@ -48,7 +57,9 @@ class DefaultPreferences @Inject constructor(
     override suspend fun saveActivityLevel(activityLevel: ActivityLevel) {
         dataStore.updateData {
             it.copy(
-                activityLevel = activityLevel,
+                userInfo = it.userInfo.copy(
+                    activityLevel = activityLevel
+                )
             )
         }
     }
@@ -56,7 +67,9 @@ class DefaultPreferences @Inject constructor(
     override suspend fun saveGoalType(weightGoal: WeightGoal) {
         dataStore.updateData {
             it.copy(
-                weightGoal = weightGoal,
+                userInfo = it.userInfo.copy(
+                    weightGoal = weightGoal
+                )
             )
         }
     }
@@ -64,7 +77,9 @@ class DefaultPreferences @Inject constructor(
     override suspend fun saveCarbRatio(carbRatio: Float) {
         dataStore.updateData {
             it.copy(
-                carbRatio = carbRatio,
+                userInfo = it.userInfo.copy(
+                    carbRatio = carbRatio
+                )
             )
         }
     }
@@ -72,7 +87,9 @@ class DefaultPreferences @Inject constructor(
     override suspend fun saveProteinRatio(proteinRatio: Float) {
         dataStore.updateData {
             it.copy(
-                proteinRatio = proteinRatio,
+                userInfo = it.userInfo.copy(
+                    proteinRatio = proteinRatio
+                )
             )
         }
     }
@@ -80,12 +97,22 @@ class DefaultPreferences @Inject constructor(
     override suspend fun saveFatRatio(fatRatio: Float) {
         dataStore.updateData {
             it.copy(
-                fatRatio = fatRatio,
+                userInfo = it.userInfo.copy(
+                    fatRatio = fatRatio
+                )
             )
         }
     }
 
-    override suspend fun loadUserInfo(): Flow<UserInfo> {
+    override suspend fun saveShouldShowOnboarding(shouldShow: Boolean) {
+        dataStore.updateData {
+            it.copy(
+                shouldShowOnboarding = shouldShow
+            )
+        }
+    }
+
+    override suspend fun loadPreferencesData(): Flow<PreferencesData> {
         return dataStore.data
     }
 }

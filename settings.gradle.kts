@@ -17,7 +17,8 @@ rootProject.name = "MultiModuleApp"
 include(
     Env.Modules.Identifiers.app,
     *arrayOf(
-        Env.Modules.Identifiers.core,
+        Env.Modules.Identifiers.coreData,
+        Env.Modules.Identifiers.coreDomain,
         Env.Modules.Identifiers.coreUi,
     ),
     *arrayOf(

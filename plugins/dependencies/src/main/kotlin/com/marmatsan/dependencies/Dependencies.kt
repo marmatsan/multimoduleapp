@@ -19,7 +19,9 @@ class Dependencies : Plugin<Settings> {
 
                 // core
                 const val core = "core"
-                const val coreUi = "core_ui"
+                const val coreData = "${core}_data"
+                const val coreDomain = "${core}_domain"
+                const val coreUi = "${core}_ui"
 
                 // onboarding
                 const val onboarding = "onboarding"
@@ -38,8 +40,9 @@ class Dependencies : Plugin<Settings> {
                 const val app = ":${Names.app}"
 
                 // core
-                const val core = ":${Names.core}"
-                const val coreUi = ":${Names.coreUi}"
+                const val coreData = ":${Names.core}:${Names.coreData}"
+                const val coreDomain = ":${Names.core}:${Names.coreDomain}"
+                const val coreUi = ":${Names.core}:${Names.coreUi}"
 
                 // onboarding
                 const val onboardingDomain = ":${Names.onboarding}:${Names.onboardingDomain}"
@@ -76,7 +79,9 @@ class Dependencies : Plugin<Settings> {
             LibraryDep.AndroidX.LifeCycle,
             LibraryDep.AndroidX.Room.RoomBundle,
             LibraryDep.AndroidX.Room.Compiler,
+            LibraryDep.AndroidX.Datastore,
             LibraryDep.Coil,
+            LibraryDep.Jetbrains.Serialization,
             LibraryDep.Google.DaggerHilt,
             LibraryDep.Google.DaggerHiltCompiler,
             LibraryDep.Ktor
@@ -92,6 +97,7 @@ class Dependencies : Plugin<Settings> {
             PluginDep.JetBrains.Jvm,
             PluginDep.JetBrains.Kapt,
             PluginDep.JetBrains.Parcelize,
+            PluginDep.JetBrains.Serialization,
             PluginDep.Google.DaggerHilt,
             PluginDep.Google.Ksp
         )

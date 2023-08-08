@@ -50,6 +50,12 @@ open class Plugin(
             group = "$group.plugin.parcelize",
             version = version
         )
+
+        object Serialization : Plugin(
+            name = "$group.plugin.serialization",
+            group = "$group.plugin.serialization",
+            version = version
+        )
     }
 
     object Google {

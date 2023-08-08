@@ -25,7 +25,7 @@ open class Library(
             artifacts = listOf(
                 "navigation-compose"
             ),
-            version = "2.5.3"
+            version = "2.6.0"
         )
 
         object Hilt : Library(
@@ -56,6 +56,15 @@ open class Library(
             version = "2.6.1"
         )
 
+        object Datastore : Library(
+            name = "$androidx.datastore",
+            group = "$androidx.datastore",
+            artifacts = listOf(
+                "datastore"
+            ),
+            version = "1.0.0"
+        )
+
         object Room {
 
             private const val group = "$androidx.room"
@@ -83,6 +92,19 @@ open class Library(
 
         }
 
+    }
+
+    object Jetbrains {
+        private const val jetbrains = "org.jetbrains"
+
+        object Serialization : Library(
+            name = "$jetbrains.kotlinx.serialization",
+            group = "$jetbrains.kotlinx",
+            artifacts = listOf(
+                "kotlinx-serialization-json"
+            ),
+            version = "1.5.1"
+        )
     }
 
     object Google {
@@ -127,7 +149,7 @@ open class Library(
             "ktor-serialization-kotlinx-json",
             "ktor-client-logging"
         ),
-        version = "2.3.1"
+        version = "2.3.3"
     )
 
 }

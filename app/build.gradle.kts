@@ -12,7 +12,7 @@ android {
         }
     }
 
-    packagingOptions {
+    packaging {
         resources {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
         }
@@ -24,7 +24,8 @@ dependencies {
 
     /* Modules */
     // Core
-    implementation(project(Env.Modules.Identifiers.core))
+    implementation(project(Env.Modules.Identifiers.coreData))
+    implementation(project(Env.Modules.Identifiers.coreDomain))
     implementation(project(Env.Modules.Identifiers.coreUi))
     // Onboarding
     implementation(project(Env.Modules.Identifiers.onboardingDomain))
@@ -41,5 +42,8 @@ dependencies {
     implementation(libs.bundles.androidx.lifecycle)
     // Activity Compose
     implementation(libs.androidx.activity)
-
+    // Navigation
+    implementation(libs.androidx.navigation)
+    // DataStore
+    implementation(libs.androidx.datastore)
 }

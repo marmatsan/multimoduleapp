@@ -40,12 +40,15 @@ class CalculateMealNutrients(
         val totalFat = allNutrients.values.sumOf { it.fat }
         val totalCalories = allNutrients.values.sumOf { it.calories }
 
-        val userInfo = preferences.loadUserInfo().single()
+        val preferencesData = preferences.loadPreferencesData().single()
 
+        val userInfo = preferencesData.userInfo
+
+        // TODO: Improve logic
         val caloricGoal = dailyCaloricRequirement(userInfo)
-        val carbsGoal = (caloricGoal * userInfo.carbRatio / 4f).roundToInt()
-        val proteinGoal = (caloricGoal * userInfo.proteinRatio / 4f).roundToInt()
-        val fatGoal = (caloricGoal * userInfo.fatRatio / 9f).roundToInt()
+        val carbsGoal = (caloricGoal * userInfo.carbRatio!! / 4f).roundToInt()
+        val proteinGoal = (caloricGoal * userInfo.proteinRatio!! / 4f).roundToInt()
+        val fatGoal = (caloricGoal * userInfo.fatRatio!! / 9f).roundToInt()
 
         return Result(
             carbsGoal = carbsGoal,
@@ -63,16 +66,17 @@ class CalculateMealNutrients(
     private fun bmr(userInfo: UserInfo): Int {
         return when (userInfo.gender) {
             Female -> {
-                (665.09f + 9.56f * userInfo.weight +
-                        1.84f * userInfo.height - 4.67 * userInfo.age).roundToInt()
+                (665.09f + 9.56f * userInfo.weight!! +
+                        1.84f * userInfo.height!! - 4.67 * userInfo.age!!).roundToInt()
             }
 
             Male -> {
-                (66.47f + 13.75f * userInfo.weight +
-                        5f * userInfo.height - 6.75f * userInfo.age).roundToInt()
+                (66.47f + 13.75f * userInfo.weight!! +
+                        5f * userInfo.height!! - 6.75f * userInfo.age!!).roundToInt()
             }
 
-            Unknown -> TODO("Not yet implemented")
+            Unknown -> TODO()
+            null -> TODO()
         }
     }
 
@@ -81,11 +85,13 @@ class CalculateMealNutrients(
             is Low -> 1.2f
             is Medium -> 1.3f
             is High -> 1.4f
+            null -> TODO()
         }
         val caloricExtra = when (userInfo.weightGoal) {
             GainWeight -> 500
             KeepWeight -> 0
             LoseWeight -> -500
+            null -> TODO()
         }
         return (bmr(userInfo) * activityFactor + caloricExtra).roundToInt()
     }

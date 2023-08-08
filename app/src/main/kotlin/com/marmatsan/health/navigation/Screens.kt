@@ -1,4 +1,4 @@
-package com.marmatsan.multimoduleapp.navigation
+package com.marmatsan.health.navigation
 
 import androidx.navigation.NavController
 

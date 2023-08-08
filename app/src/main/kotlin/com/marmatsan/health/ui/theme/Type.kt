@@ -1,4 +1,4 @@
-package com.marmatsan.multimoduleapp.ui.theme
+package com.marmatsan.health.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

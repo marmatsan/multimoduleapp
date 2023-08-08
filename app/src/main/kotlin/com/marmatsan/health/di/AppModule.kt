@@ -1,13 +1,14 @@
-package com.marmatsan.multimoduleapp.di
+package com.marmatsan.health.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
 import com.marmatsan.core_data.preferences.DefaultPreferences
-import com.marmatsan.core_data.preferences.UserInfoSerializer
+import com.marmatsan.core_data.preferences.PreferencesDataSerializer
 import com.marmatsan.core_domain.model.UserInfo
 import com.marmatsan.core_domain.preferences.Preferences
+import com.marmatsan.core_domain.preferences.PreferencesData
 import com.marmatsan.core_domain.use_case.FilterOutDigits
 import com.marmatsan.core_domain.use_case.FilterOutWeight
 import dagger.Module
@@ -30,9 +31,9 @@ object AppModule {
     @Provides
     fun provideProtoDataStore(
         @ApplicationContext appContext: Context
-    ): DataStore<UserInfo> {
+    ): DataStore<PreferencesData> {
         return DataStoreFactory.create(
-            serializer = UserInfoSerializer,
+            serializer = PreferencesDataSerializer,
             produceFile = { appContext.dataStoreFile(DATA_STORE_FILE_NAME) },
             corruptionHandler = null,
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
@@ -41,7 +42,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providePreferences(dataStore: DataStore<UserInfo>): Preferences {
+    fun providePreferences(dataStore: DataStore<PreferencesData>): Preferences {
         return DefaultPreferences(dataStore)
     }
 

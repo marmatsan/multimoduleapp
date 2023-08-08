@@ -1,4 +1,4 @@
-package com.marmatsan.multimoduleapp.ui.theme
+package com.marmatsan.health.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -74,7 +74,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun MultiLayerAppTheme(
+fun HealthTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

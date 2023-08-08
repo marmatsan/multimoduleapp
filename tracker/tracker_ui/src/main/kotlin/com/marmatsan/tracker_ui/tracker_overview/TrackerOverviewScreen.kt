@@ -14,33 +14,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 fun TrackerOverviewScreen(
     viewModel: TrackerOverviewViewModel = hiltViewModel()
 ) {
-    TrackerOverviewScreenContent(
-        onExecuteSearch = viewModel::executeSearch
-    )
+    TrackerOverviewScreenContent()
 }
 
 @Composable
-fun TrackerOverviewScreenContent(
-    onExecuteSearch: () -> Unit
-) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Button(
-            onClick = {
-                onExecuteSearch()
-            }
-        ) {
-            Text(text = "Make request")
-        }
-    }
+fun TrackerOverviewScreenContent() {
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
 fun TrackerOverviewScreenContentPreview() {
-    TrackerOverviewScreenContent(
-        onExecuteSearch = { }
-    )
+    TrackerOverviewScreenContent()
 }

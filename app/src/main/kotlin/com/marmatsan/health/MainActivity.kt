@@ -1,4 +1,4 @@
-package com.marmatsan.multimoduleapp
+package com.marmatsan.health
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,9 +14,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.marmatsan.core_domain.navigation.Route
-import com.marmatsan.multimoduleapp.navigation.navigate
-import com.marmatsan.multimoduleapp.navigation.navigateBack
-import com.marmatsan.multimoduleapp.ui.theme.MultiLayerAppTheme
+import com.marmatsan.health.navigation.navigate
+import com.marmatsan.health.navigation.navigateBack
+import com.marmatsan.health.ui.theme.HealthTheme
 import com.marmatsan.onboarding_ui.activity.ActivityScreen
 import com.marmatsan.onboarding_ui.age.AgeScreen
 import com.marmatsan.onboarding_ui.gender.GenderScreen
@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MultiLayerAppTheme {
+            HealthTheme {
                 val snackbarHostState = remember { SnackbarHostState() }
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),

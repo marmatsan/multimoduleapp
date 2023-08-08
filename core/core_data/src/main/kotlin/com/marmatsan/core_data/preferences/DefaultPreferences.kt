@@ -115,4 +115,5 @@ class DefaultPreferences @Inject constructor(
     override suspend fun loadPreferencesData(): Flow<PreferencesData> {
         return dataStore.data
     }
+
 }

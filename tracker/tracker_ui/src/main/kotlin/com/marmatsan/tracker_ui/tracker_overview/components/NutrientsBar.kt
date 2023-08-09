@@ -22,7 +22,7 @@ fun NutrientsBar(
     calorieGoal: Int,
     modifier: Modifier = Modifier
 ) {
-    val barColor = MaterialTheme.colorScheme.onPrimary
+    val barColor = MaterialTheme.colorScheme.background
     val caloriesExceedColor = MaterialTheme.colorScheme.error
 
     val carbWidthRatio = remember {

@@ -3,10 +3,7 @@ package com.marmatsan.tracker_ui.tracker_overview.components
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,19 +16,21 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.marmatsan.core_ui.theme.CarbColor
 import com.marmatsan.tracker_ui.R
 import com.marmatsan.tracker_ui.components.UnitDisplay
 
 @Composable
 fun NutrientBarInfo(
+    modifier: Modifier = Modifier,
+    strokeWidth: Dp = 8.dp,
     value: Int,
     goal: Int,
     name: String,
-    color: Color,
-    modifier: Modifier = Modifier,
-    strokeWidth: Dp = 8.dp,
+    color: Color
 ) {
     val background = MaterialTheme.colorScheme.background
     val goalExceededColor = MaterialTheme.colorScheme.error
@@ -52,7 +51,7 @@ fun NutrientBarInfo(
     }
 
     Box(
-        modifier = modifier,
+        modifier = modifier.size(90.dp), // TODO: Better approach?
         contentAlignment = Alignment.Center
     ) {
         Canvas(
@@ -111,4 +110,14 @@ fun NutrientBarInfo(
     }
 }
 
-// TODO: Create preview
+@Preview(showBackground = true)
+@Composable
+fun NutrientBarInfoPreview() {
+    NutrientBarInfo(
+        modifier = Modifier.padding(16.dp),
+        value = 60,
+        goal = 100,
+        name = stringResource(id = R.string.carbs),
+        color = CarbColor
+    )
+}

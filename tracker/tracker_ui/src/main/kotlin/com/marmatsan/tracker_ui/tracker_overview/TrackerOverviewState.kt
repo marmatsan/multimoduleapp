@@ -1,11 +1,8 @@
 package com.marmatsan.tracker_ui.tracker_overview
 
-import android.os.Build.VERSION_CODES
-import androidx.annotation.RequiresApi
 import com.marmatsan.tracker_domain.model.TrackedFood
 import java.time.LocalDate
 
-@RequiresApi(VERSION_CODES.O)
 data class TrackerOverviewState(
     val totalCarbs: Int = 0,
     val totalProtein: Int = 0,

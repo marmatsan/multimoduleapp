@@ -54,15 +54,13 @@ fun TrackerOverviewScreenContent(
             )
             DaySelector(
                 date = state.date,
-                onPreviousDayClick = {
-                    onPreviousDayClick()
-                },
-                onNextDayClick = {
-                    onNextDayClick()
-                },
+                onPreviousDayClick = onPreviousDayClick,
+                onNextDayClick = onNextDayClick,
                 modifier = modifier
                     .fillMaxWidth()
-                    .padding(horizontal = spacing.spaceMedium)
+                    .padding(
+                        horizontal = spacing.spaceMedium
+                    )
             )
             Spacer(
                 modifier = Modifier.height(spacing.spaceMedium)
@@ -74,7 +72,10 @@ fun TrackerOverviewScreenContent(
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
 fun TrackerOverviewScreenContentPreview() {
-    //TrackerOverviewScreenContent()
+    TrackerOverviewScreenContent(
+        modifier = Modifier,
+        state = TrackerOverviewState(),
+        onPreviousDayClick = { },
+        onNextDayClick = { }
+    )
 }
-
-// TODO: Create preview

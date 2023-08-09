@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.marmatsan.tracker_ui.R
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -29,7 +30,9 @@ fun DaySelector(
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
-            onClick = onPreviousDayClick
+            onClick = {
+                onPreviousDayClick()
+            }
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
@@ -40,7 +43,9 @@ fun DaySelector(
             text = parseDateText(date = date)
         )
         IconButton(
-            onClick = onNextDayClick
+            onClick = {
+                onNextDayClick()
+            }
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowForward,
@@ -51,7 +56,7 @@ fun DaySelector(
 }
 
 @Composable
-fun parseDateText(date: LocalDate): String {
+private fun parseDateText(date: LocalDate): String {
     val today = LocalDate.now()
     return when (date) {
         today -> stringResource(id = R.string.today)
@@ -59,4 +64,14 @@ fun parseDateText(date: LocalDate): String {
         today.plusDays(1) -> stringResource(id = R.string.tomorrow)
         else -> DateTimeFormatter.ofPattern("dd LLLL").format(date)
     }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Composable
+fun DaySelectorPreview() {
+    DaySelector(
+        date = LocalDate.now(),
+        onPreviousDayClick = { },
+        onNextDayClick = { }
+    )
 }

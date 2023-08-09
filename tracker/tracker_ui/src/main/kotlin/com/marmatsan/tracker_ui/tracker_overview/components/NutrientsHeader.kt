@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.marmatsan.core_ui.LocalSpacing
@@ -75,10 +76,7 @@ fun NutrientsHeader(
             protein = state.totalProtein,
             fat = state.totalFat,
             calories = state.totalCalories,
-            calorieGoal = state.caloriesGoal,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(30.dp)
+            calorieGoal = state.caloriesGoal
         )
         Spacer(
             modifier = Modifier.height(spacing.spaceLarge)
@@ -91,25 +89,28 @@ fun NutrientsHeader(
                 value = state.totalCarbs,
                 goal = state.carbsGoal,
                 name = stringResource(id = R.string.carbs),
-                color = CarbColor,
-                modifier = Modifier.size(90.dp)
+                color = CarbColor
             )
             NutrientBarInfo(
                 value = state.totalProtein,
                 goal = state.proteinGoal,
                 name = stringResource(id = R.string.protein),
-                color = ProteinColor,
-                modifier = Modifier.size(90.dp)
+                color = ProteinColor
             )
             NutrientBarInfo(
                 value = state.totalFat,
                 goal = state.fatGoal,
                 name = stringResource(id = R.string.fat),
-                color = FatColor,
-                modifier = Modifier.size(90.dp)
+                color = FatColor
             )
         }
     }
 }
 
-// TODO: Create preview
+@Preview(showBackground = true)
+@Composable
+fun NutrientsHeaderPreview() {
+    NutrientsHeader(
+        state = TrackerOverviewState()
+    )
+}

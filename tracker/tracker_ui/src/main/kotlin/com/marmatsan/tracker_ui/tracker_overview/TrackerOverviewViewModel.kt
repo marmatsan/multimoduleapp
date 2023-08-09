@@ -1,7 +1,6 @@
 package com.marmatsan.tracker_ui.tracker_overview
 
 import android.os.Build.VERSION_CODES
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -20,7 +19,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@RequiresApi(VERSION_CODES.O)
 @HiltViewModel
 class TrackerOverviewViewModel @Inject constructor(
     preferences: Preferences,

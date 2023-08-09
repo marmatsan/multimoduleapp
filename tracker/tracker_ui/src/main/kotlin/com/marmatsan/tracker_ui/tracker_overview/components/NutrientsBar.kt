@@ -2,6 +2,8 @@ package com.marmatsan.tracker_ui.tracker_overview.components
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -9,18 +11,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.marmatsan.core_ui.theme.CarbColor
 import com.marmatsan.core_ui.theme.FatColor
 import com.marmatsan.core_ui.theme.ProteinColor
 
 @Composable
 fun NutrientsBar(
+    modifier: Modifier = Modifier,
     carbs: Int,
     protein: Int,
     fat: Int,
     calories: Int,
-    calorieGoal: Int,
-    modifier: Modifier = Modifier
+    calorieGoal: Int
 ) {
     val barColor = MaterialTheme.colorScheme.background
     val caloriesExceedColor = MaterialTheme.colorScheme.error
@@ -52,6 +56,8 @@ fun NutrientsBar(
     }
     Canvas(
         modifier = modifier
+            .fillMaxWidth()
+            .height(30.dp) // TODO: Better approach
     ) {
         if (calories <= calorieGoal) {
             val carbsWidth = carbWidthRatio.value * size.width
@@ -94,4 +100,16 @@ fun NutrientsBar(
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun NutrientsBarPreview() {
+    NutrientsBar(
+        carbs = 100,
+        protein = 150,
+        fat = 200,
+        calories = 1000,
+        calorieGoal = 2000
+    )
 }

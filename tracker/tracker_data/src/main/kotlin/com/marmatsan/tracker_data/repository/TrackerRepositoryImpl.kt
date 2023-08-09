@@ -1,7 +1,5 @@
 package com.marmatsan.tracker_data.repository
 
-import android.os.Build.VERSION_CODES
-import androidx.annotation.RequiresApi
 import com.marmatsan.tracker_data.local.TrackerDao
 import com.marmatsan.tracker_data.mapper.toTrackableFood
 import com.marmatsan.tracker_data.mapper.toTrackedFood
@@ -44,17 +42,14 @@ class TrackerRepositoryImpl(
         }
     }
 
-    @RequiresApi(VERSION_CODES.O)
     override suspend fun insertTrackedFood(food: TrackedFood) {
         dao.insertTrackedFood(food.toTrackedFoodEntity())
     }
 
-    @RequiresApi(VERSION_CODES.O)
     override suspend fun deleteTrackedFood(food: TrackedFood) {
         dao.deleteTrackedFood(food.toTrackedFoodEntity())
     }
 
-    @RequiresApi(VERSION_CODES.O)
     override fun getFoodsForDate(localDate: LocalDate): Flow<List<TrackedFood>> {
         return dao.getFoodsForDate(
             day = localDate.dayOfMonth,

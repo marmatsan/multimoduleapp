@@ -1,13 +1,11 @@
 package com.marmatsan.tracker_data.mapper
 
-import android.os.Build.VERSION_CODES
-import androidx.annotation.RequiresApi
 import com.marmatsan.tracker_data.local.entity.TrackedFoodEntity
 import com.marmatsan.tracker_domain.model.Meal
 import com.marmatsan.tracker_domain.model.TrackedFood
 import java.time.LocalDate
 
-@RequiresApi(VERSION_CODES.O) // TODO: Change of LocalDate to a more robust type
+// TODO: Change of LocalDate to a more robust type
 fun TrackedFoodEntity.toTrackedFood(): TrackedFood {
     return TrackedFood(
         id = id,
@@ -23,7 +21,6 @@ fun TrackedFoodEntity.toTrackedFood(): TrackedFood {
     )
 }
 
-@RequiresApi(VERSION_CODES.O)
 fun TrackedFood.toTrackedFoodEntity(): TrackedFoodEntity {
     return TrackedFoodEntity(
         id = id,

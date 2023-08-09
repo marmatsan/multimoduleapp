@@ -34,7 +34,7 @@ class Android : Plugin<Project> {
             compileSdk = 33
 
             defaultConfig {
-                minSdk = 21
+                minSdk = 26
 
                 if (androidExtension is ApplicationExtension) {
                     androidExtension.apply {

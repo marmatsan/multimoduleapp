@@ -103,7 +103,10 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(Route.Tracker.OVERVIEW) {
-                            TrackerOverviewScreen()
+                            TrackerOverviewScreen(
+                                modifier = Modifier.padding(paddingValues),
+                                onNavigate = navController::navigate
+                            )
                         }
                         composable(Route.Tracker.SEARCH) {
 

@@ -29,4 +29,5 @@ dependencies {
     implementation(libs.bundles.io.ktor)
     // Room
     implementation(libs.bundles.androidx.room)
+    kapt(libs.androidx.room.compiler) // TODO: Migrate to KSP
 }

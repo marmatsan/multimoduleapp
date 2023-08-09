@@ -17,8 +17,8 @@ import com.marmatsan.core_ui.LocalSpacing
 @Composable
 fun UnitDisplay(
     modifier: Modifier = Modifier,
-    amountColor: Color = MaterialTheme.colorScheme.onBackground,
-    unitColor: Color = MaterialTheme.colorScheme.onBackground,
+    amountColor: Color = MaterialTheme.colorScheme.onPrimary,
+    unitColor: Color = MaterialTheme.colorScheme.onPrimary,
     amount: Int,
     unit: String,
     amountTextSize: TextUnit = 20.sp,
@@ -44,7 +44,7 @@ fun UnitDisplay(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Preview(showBackground = true)
 @Composable
 fun UnitDisplayPreview() {
     UnitDisplay(

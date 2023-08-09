@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = Route.OnBoarding.WELCOME
+                        startDestination = Route.Tracker.OVERVIEW // TODO: Change to Route.OnBoarding.WELCOME
                     ) {
                         composable(Route.OnBoarding.WELCOME) {
                             WelcomeScreen(

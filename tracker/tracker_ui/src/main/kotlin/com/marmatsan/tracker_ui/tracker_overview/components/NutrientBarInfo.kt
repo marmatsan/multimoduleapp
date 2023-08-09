@@ -89,6 +89,7 @@ fun NutrientBarInfo(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // TODO: Reduce boilerplate code in UnitDisplay text color
             UnitDisplay(
                 amount = value,
                 unit = stringResource(id = R.string.grams),

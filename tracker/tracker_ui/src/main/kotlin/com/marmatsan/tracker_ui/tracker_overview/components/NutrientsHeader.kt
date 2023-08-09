@@ -1,6 +1,7 @@
 package com.marmatsan.tracker_ui.tracker_overview.components
 
 import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -22,8 +23,8 @@ import com.marmatsan.tracker_ui.tracker_overview.TrackerOverviewState
 
 @Composable
 fun NutrientsHeader(
-    state: TrackerOverviewState,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    state: TrackerOverviewState
 ) {
     val spacing = LocalSpacing.current
     val animatedCalorieCount = animateIntAsState(
@@ -38,6 +39,7 @@ fun NutrientsHeader(
                     bottomEnd = 50.dp
                 )
             )
+            .background(MaterialTheme.colorScheme.primary)
             .padding(
                 horizontal = spacing.spaceLarge,
                 vertical = spacing.spaceExtraLarge
@@ -50,25 +52,24 @@ fun NutrientsHeader(
             UnitDisplay(
                 amount = animatedCalorieCount.value,
                 unit = stringResource(id = R.string.kcal),
-                amountColor = MaterialTheme.colorScheme.onPrimary,
                 amountTextSize = 40.sp,
-                unitColor = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.align(Alignment.Bottom)
             )
             Column {
                 Text(
-                    text = stringResource(id = R.string.your_goal)
+                    text = stringResource(id = R.string.your_goal),
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
                 UnitDisplay(
                     amount = animatedCalorieCount.value,
                     unit = stringResource(id = R.string.kcal),
-                    amountColor = MaterialTheme.colorScheme.onPrimary,
                     amountTextSize = 40.sp,
-                    unitColor = MaterialTheme.colorScheme.onPrimary,
                 )
             }
         }
-        Spacer(modifier = Modifier.height(spacing.spaceSmall))
+        Spacer(
+            modifier = Modifier.height(spacing.spaceSmall)
+        )
         NutrientsBar(
             carbs = state.totalCarbs,
             protein = state.totalProtein,
@@ -77,8 +78,11 @@ fun NutrientsHeader(
             calorieGoal = state.caloriesGoal,
             modifier = Modifier
                 .fillMaxWidth()
+                .height(30.dp)
         )
-        Spacer(modifier = Modifier.height(spacing.spaceLarge))
+        Spacer(
+            modifier = Modifier.height(spacing.spaceLarge)
+        )
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween

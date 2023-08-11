@@ -1,7 +1,6 @@
 package com.marmatsan.core_data.preferences
 
 import androidx.datastore.core.Serializer
-import com.marmatsan.core_domain.model.UserInfo
 import com.marmatsan.core_domain.preferences.PreferencesData
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json

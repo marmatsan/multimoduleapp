@@ -7,7 +7,8 @@ import com.marmatsan.tracker_ui.R
 
 data class MealUi(
     val name: UiText,
-    @DrawableRes val drawableRes: Int,
+    @DrawableRes
+    val drawableRes: Int,
     val meal: Meal,
     val carbs: Int = 0,
     val protein: Int = 0,

@@ -1,7 +1,10 @@
 package com.marmatsan.tracker_ui.tracker_overview
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -9,6 +12,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.marmatsan.core_domain.util.UiEvent
 import com.marmatsan.core_ui.LocalSpacing
 import com.marmatsan.tracker_ui.tracker_overview.components.DaySelector
+import com.marmatsan.tracker_ui.tracker_overview.components.ExpandableMeal
 import com.marmatsan.tracker_ui.tracker_overview.components.NutrientsHeader
 
 @Composable
@@ -25,6 +29,9 @@ fun TrackerOverviewScreen(
         },
         onNextDayClick = {
             viewModel.onEvent(TrackerOverviewEvent.OnNextDayClick)
+        },
+        onToggleClick = {
+            viewModel.onEvent(TrackerOverviewEvent.OnToggleMealClick(it))
         }
     )
 }
@@ -34,7 +41,8 @@ fun TrackerOverviewScreenContent(
     modifier: Modifier,
     state: TrackerOverviewState,
     onPreviousDayClick: () -> Unit,
-    onNextDayClick: () -> Unit
+    onNextDayClick: () -> Unit,
+    onToggleClick: (MealUi) -> Unit
 ) {
     val spacing = LocalSpacing.current
 
@@ -44,6 +52,7 @@ fun TrackerOverviewScreenContent(
             .padding(
                 bottom = spacing.spaceMedium
             )
+            .background(MaterialTheme.colorScheme.background)
     ) {
         item {
             NutrientsHeader(
@@ -66,16 +75,28 @@ fun TrackerOverviewScreenContent(
                 modifier = Modifier.height(spacing.spaceMedium)
             )
         }
+        items(state.meals) { meal ->
+            ExpandableMeal(
+                meal = meal,
+                onToggleClick = {
+                    onToggleClick(meal)
+                },
+                content = {
+
+                }
+            )
+        }
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Preview(showBackground = true)
 @Composable
 fun TrackerOverviewScreenContentPreview() {
     TrackerOverviewScreenContent(
         modifier = Modifier,
         state = TrackerOverviewState(),
         onPreviousDayClick = { },
-        onNextDayClick = { }
+        onNextDayClick = { },
+        onToggleClick = { }
     )
 }

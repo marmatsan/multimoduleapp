@@ -13,7 +13,7 @@ plugins {
     id("com.marmatsan.dependencies") apply true
 }
 
-rootProject.name = "MultiModuleApp"
+rootProject.name = "Heal-th"
 include(
     Env.Modules.Identifiers.app,
     *arrayOf(

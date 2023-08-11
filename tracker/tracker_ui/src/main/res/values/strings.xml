@@ -15,4 +15,9 @@
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
     <string name="tomorrow">Tomorrow</string>
+    <string name="collapse">Collapse</string>
+    <string name="extend">Extend</string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
+    <string name="nutrient_info">Nutrient Info</string>
 </resources>

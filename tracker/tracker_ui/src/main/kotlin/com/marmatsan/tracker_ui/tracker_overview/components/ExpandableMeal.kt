@@ -29,10 +29,10 @@ import com.marmatsan.tracker_ui.R
 
 @Composable
 fun ExpandableMeal(
+    modifier: Modifier = Modifier,
     meal: MealUi,
     onToggleClick: () -> Unit,
-    content: @Composable () -> Unit,
-    modifier: Modifier = Modifier
+    content: @Composable () -> Unit
 ) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
@@ -40,7 +40,7 @@ fun ExpandableMeal(
         modifier = modifier
     ) {
         Row(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .clickable { onToggleClick() }
                 .padding(spacing.spaceMedium),
@@ -52,14 +52,14 @@ fun ExpandableMeal(
                 contentDescription = meal.name.asString(context)
             )
             Spacer(
-                modifier = modifier.width(spacing.spaceMedium)
+                modifier = Modifier.width(spacing.spaceMedium)
             )
             Column(
-                modifier = modifier.weight(1f)
+                modifier = Modifier.weight(1f)
             ) {
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
                         text = meal.name.asString(context),
@@ -75,10 +75,10 @@ fun ExpandableMeal(
                     )
                 }
                 Spacer(
-                    modifier = modifier.height(spacing.spaceSmall)
+                    modifier = Modifier.height(spacing.spaceSmall)
                 )
                 Row(
-                    modifier = modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     UnitDisplay(
@@ -95,7 +95,7 @@ fun ExpandableMeal(
                             unit = stringResource(id = R.string.grams)
                         )
                         Spacer(
-                            modifier = modifier.width(spacing.spaceSmall)
+                            modifier = Modifier.width(spacing.spaceSmall)
                         )
                         NutrientInfo(
                             name = stringResource(id = R.string.protein),
@@ -103,7 +103,7 @@ fun ExpandableMeal(
                             unit = stringResource(id = R.string.grams)
                         )
                         Spacer(
-                            modifier = modifier.width(spacing.spaceSmall)
+                            modifier = Modifier.width(spacing.spaceSmall)
                         )
                         NutrientInfo(
                             name = stringResource(id = R.string.fat),
@@ -115,7 +115,7 @@ fun ExpandableMeal(
             }
         }
         Spacer(
-            modifier = modifier.height(spacing.spaceMedium)
+            modifier = Modifier.height(spacing.spaceMedium)
         )
         AnimatedVisibility(visible = meal.isExpanded) {
             content()
@@ -123,7 +123,7 @@ fun ExpandableMeal(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
 fun ExpandableMealPreview() {
     ExpandableMeal(

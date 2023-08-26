@@ -41,7 +41,7 @@ class AgeViewModel @Inject constructor(
 
             is AgeEvent.OnBackClicked -> {
                 viewModelScope.launch {
-                    _uiEvent.send(UiEvent.NavigateBack)
+                    _uiEvent.send(UiEvent.NavigateDown)
                 }
             }
 

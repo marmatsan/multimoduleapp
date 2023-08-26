@@ -35,7 +35,7 @@ class GoalViewModel @Inject constructor(
 
             is WeightGoalEvent.OnBackClicked -> {
                 viewModelScope.launch {
-                    _uiEvent.send(UiEvent.NavigateBack)
+                    _uiEvent.send(UiEvent.NavigateDown)
                 }
             }
 

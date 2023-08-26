@@ -51,7 +51,7 @@ class NutrientGoalViewModel @Inject constructor(
 
             NutrientGoalEvent.OnBackClick -> {
                 viewModelScope.launch {
-                    _uiEvent.send(UiEvent.NavigateBack)
+                    _uiEvent.send(UiEvent.NavigateDown)
                 }
             }
 

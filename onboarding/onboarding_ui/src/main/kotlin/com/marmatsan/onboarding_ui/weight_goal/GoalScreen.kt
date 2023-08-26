@@ -28,7 +28,7 @@ fun GoalScreen(
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.Navigate -> onNavigate(event)
-                is UiEvent.NavigateBack -> onNavigateBack()
+                is UiEvent.NavigateDown -> onNavigateBack()
                 else -> Unit
             }
         }

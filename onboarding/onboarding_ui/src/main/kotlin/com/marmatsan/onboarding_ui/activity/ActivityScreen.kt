@@ -11,12 +11,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marmatsan.core_domain.R
 import com.marmatsan.core_domain.model.ActivityLevel
-import com.marmatsan.core_domain.model.Gender
 import com.marmatsan.core_domain.util.UiEvent
 import com.marmatsan.core_ui.LocalSpacing
 import com.marmatsan.onboarding_ui.components.ActionButton
 import com.marmatsan.onboarding_ui.components.SelectableButton
-import com.marmatsan.onboarding_ui.components.UnitTextField
 
 @Composable
 fun ActivityScreen(
@@ -30,7 +28,7 @@ fun ActivityScreen(
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.Navigate -> onNavigate(event)
-                is UiEvent.NavigateBack -> onNavigateBack()
+                is UiEvent.NavigateDown -> onNavigateBack()
                 else -> Unit
             }
         }

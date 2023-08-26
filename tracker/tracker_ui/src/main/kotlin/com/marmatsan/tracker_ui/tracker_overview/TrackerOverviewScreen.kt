@@ -6,14 +6,18 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.annotation.ExperimentalCoilApi
 import com.marmatsan.core_domain.util.UiEvent
 import com.marmatsan.core_ui.LocalSpacing
-import com.marmatsan.tracker_ui.tracker_overview.components.DaySelector
-import com.marmatsan.tracker_ui.tracker_overview.components.ExpandableMeal
-import com.marmatsan.tracker_ui.tracker_overview.components.NutrientsHeader
+import com.marmatsan.tracker_domain.model.TrackedFood
+import com.marmatsan.tracker_ui.R
+import com.marmatsan.tracker_ui.tracker_overview.components.*
 
 @Composable
 fun TrackerOverviewScreen(
@@ -21,6 +25,17 @@ fun TrackerOverviewScreen(
     onNavigate: (UiEvent.Navigate) -> Unit,
     viewModel: TrackerOverviewViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
+
+    LaunchedEffect(context) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is UiEvent.Navigate -> onNavigate(event)
+                else -> Unit
+            }
+        }
+    }
+
     TrackerOverviewScreenContent(
         modifier = modifier,
         state = viewModel.state,
@@ -32,19 +47,31 @@ fun TrackerOverviewScreen(
         },
         onToggleClick = {
             viewModel.onEvent(TrackerOverviewEvent.OnToggleMealClick(it))
+        },
+        onDeleteClick = {
+            viewModel.onEvent(
+                TrackerOverviewEvent.OnDeleteTrackedFoodClick(it)
+            )
+        },
+        onAddFood = {
+            viewModel.onEvent(TrackerOverviewEvent.OnAddFoodClick(it))
         }
     )
 }
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun TrackerOverviewScreenContent(
     modifier: Modifier,
     state: TrackerOverviewState,
     onPreviousDayClick: () -> Unit,
     onNextDayClick: () -> Unit,
-    onToggleClick: (MealUi) -> Unit
+    onToggleClick: (MealUi) -> Unit,
+    onDeleteClick: (TrackedFood) -> Unit,
+    onAddFood: (MealUi) -> Unit
 ) {
     val spacing = LocalSpacing.current
+    val context = LocalContext.current
 
     LazyColumn(
         modifier = modifier
@@ -62,29 +89,52 @@ fun TrackerOverviewScreenContent(
                 modifier = Modifier.height(spacing.spaceMedium)
             )
             DaySelector(
-                date = state.date,
-                onPreviousDayClick = onPreviousDayClick,
-                onNextDayClick = onNextDayClick,
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(
                         horizontal = spacing.spaceMedium
-                    )
+                    ),
+                date = state.date,
+                onPreviousDayClick = onPreviousDayClick,
+                onNextDayClick = onNextDayClick
             )
             Spacer(
                 modifier = Modifier.height(spacing.spaceMedium)
             )
         }
-        items(state.meals) { meal ->
+        items(state.meals) { mealUi ->
             ExpandableMeal(
-                meal = meal,
+                modifier = Modifier.fillMaxWidth(),
+                meal = mealUi,
                 onToggleClick = {
-                    onToggleClick(meal)
-                },
-                content = {
-
+                    onToggleClick(mealUi)
                 }
-            )
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(horizontal = spacing.spaceSmall)
+                ) {
+                    state.trackedFoods.forEach { trackedFood ->
+                        TrackedFoodItem(
+                            trackedFood = trackedFood,
+                            onDeleteClick = {
+                                onDeleteClick(trackedFood)
+                            }
+                        )
+                        Spacer(modifier = Modifier.height(spacing.spaceMedium))
+                    }
+                    AddButton(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(
+                            id = R.string.add_meal,
+                            mealUi.name.asString(context)
+                        ),
+                        onClick = {
+                            onAddFood(mealUi)
+                        }
+                    )
+                }
+            }
         }
     }
 }
@@ -97,6 +147,8 @@ fun TrackerOverviewScreenContentPreview() {
         state = TrackerOverviewState(),
         onPreviousDayClick = { },
         onNextDayClick = { },
-        onToggleClick = { }
+        onToggleClick = { },
+        onDeleteClick = { },
+        onAddFood = { }
     )
 }

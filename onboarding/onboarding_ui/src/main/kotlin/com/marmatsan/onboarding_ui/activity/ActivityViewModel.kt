@@ -34,7 +34,7 @@ class ActivityViewModel @Inject constructor(
 
             is ActivityEvent.OnBackClicked -> {
                 viewModelScope.launch {
-                    _uiEvent.send(UiEvent.NavigateBack)
+                    _uiEvent.send(UiEvent.NavigateDown)
                 }
             }
 

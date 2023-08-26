@@ -38,7 +38,7 @@ fun WeightScreen(
                     )
                 }
 
-                is UiEvent.NavigateBack -> onNavigateBack()
+                is UiEvent.NavigateDown -> onNavigateBack()
 
                 else -> Unit
             }

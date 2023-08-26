@@ -38,7 +38,7 @@ fun AgeScreen(
                     )
                 }
 
-                is UiEvent.NavigateBack -> {
+                is UiEvent.NavigateDown -> {
                     onNavigateBack()
                 }
 

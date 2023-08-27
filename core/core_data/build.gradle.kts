@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
     /* Modules */
-    implementation(project(Dependencies.Env.Modules.Identifiers.coreDomain))
+    implementation(projects.core.coreDomain)
 
     /* Libraries */
     // DataStore

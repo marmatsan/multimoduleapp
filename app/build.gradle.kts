@@ -24,16 +24,16 @@ dependencies {
 
     /* Modules */
     // Core
-    implementation(project(Env.Modules.Identifiers.coreData))
-    implementation(project(Env.Modules.Identifiers.coreDomain))
-    implementation(project(Env.Modules.Identifiers.coreUi))
+    implementation(projects.core.coreData)
+    implementation(projects.core.coreDomain)
+    implementation(projects.core.coreUi)
     // Onboarding
-    implementation(project(Env.Modules.Identifiers.onboardingDomain))
-    implementation(project(Env.Modules.Identifiers.onboardingUi))
+    implementation(projects.onboarding.onboardingDomain)
+    implementation(projects.onboarding.onboardingUi)
     //Tracker
-    implementation(project(Env.Modules.Identifiers.trackerData))
-    implementation(project(Env.Modules.Identifiers.trackerDomain))
-    implementation(project(Env.Modules.Identifiers.trackerUi))
+    implementation(projects.tracker.trackerData)
+    implementation(projects.tracker.trackerDomain)
+    implementation(projects.tracker.trackerUi)
 
     /* Libraries */
     // Core

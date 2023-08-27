@@ -14,6 +14,7 @@ plugins {
 }
 
 rootProject.name = "Heal-th"
+
 include(
     Env.Modules.Identifiers.app,
     *arrayOf(

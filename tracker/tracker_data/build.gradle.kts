@@ -21,8 +21,8 @@ android {
 
 dependencies {
     /* Modules */
-    implementation(project(Env.Modules.Identifiers.coreDomain))
-    implementation(project(Env.Modules.Identifiers.trackerDomain))
+    implementation(projects.core.coreDomain)
+    implementation(projects.tracker.trackerDomain)
 
     /* Libraries */
     // Ktor

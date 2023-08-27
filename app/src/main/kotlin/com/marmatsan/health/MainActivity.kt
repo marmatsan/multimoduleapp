@@ -28,7 +28,7 @@ import com.marmatsan.onboarding_ui.nutrient_goal.NutrientGoalScreen
 import com.marmatsan.onboarding_ui.weight.WeightScreen
 import com.marmatsan.onboarding_ui.weight_goal.GoalScreen
 import com.marmatsan.onboarding_ui.welcome.WelcomeScreen
-import com.marmatsan.tracker_ui.search.components.SearchScreen
+import com.marmatsan.tracker_ui.search.SearchScreen
 import com.marmatsan.tracker_ui.tracker_overview.TrackerOverviewScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     snackbarHost = { SnackbarHost(snackbarHostState) }
                 ) { paddingValues ->
-                    val navController = rememberNavController()
+                    val navController = rememberNavController() // TODO: Improve navigation
                     NavHost(
                         navController = navController,
                         startDestination = Route.OnBoarding.WELCOME // TODO: Route.OnBoarding.WELCOME

@@ -28,9 +28,6 @@
     <string name="add">Add</string>
     <string name="today">Today</string>
     <string name="recent">Recent</string>
-    <string name="kcal_per_100g">%dkcal / 100g</string>
-    <string name="track">Track</string>
-    <string name="no_results">No results</string>
     <string name="what_are_your_nutrient_goals">What are your nutrient goals?</string>
     <string name="percent_proteins">% proteins</string>
     <string name="percent_fats">% fats</string>

@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.marmatsan.core_ui.LocalSpacing
@@ -55,7 +56,8 @@ fun SearchTextField(
                 }
             ),
             keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Search
+                imeAction = ImeAction.Search,
+                keyboardType = KeyboardType.Number
             ),
             modifier = Modifier
                 .clip(RoundedCornerShape(5.dp))
@@ -64,10 +66,9 @@ fun SearchTextField(
                     elevation = 2.dp,
                     shape = RoundedCornerShape(5.dp)
                 )
-                .background(MaterialTheme.colorScheme.surface)
+                .background(MaterialTheme.colorScheme.primary)
                 .fillMaxWidth()
-                .padding(spacing.spaceMedium)
-                .padding(end = spacing.spaceMedium)
+                .padding(all = spacing.spaceMedium)
                 .onFocusChanged { onFocusChanged(it) }
         )
         if (shouldShowHint) {
@@ -87,7 +88,8 @@ fun SearchTextField(
         ) {
             Icon(
                 imageVector = Icons.Default.Search,
-                contentDescription = stringResource(id = R.string.search)
+                contentDescription = stringResource(id = R.string.search),
+                tint = MaterialTheme.colorScheme.onPrimary
             )
         }
     }

@@ -42,7 +42,7 @@ fun UnitTextField(
                 .width(IntrinsicSize.Min)
                 .alignBy(LastBaseline)
         )
-        Spacer(modifier = Modifier.width(spacing.spaceSmall))
+        Spacer(Modifier.width(spacing.spaceSmall))
         Text(
             text = unit,
             modifier = Modifier.alignBy(LastBaseline)

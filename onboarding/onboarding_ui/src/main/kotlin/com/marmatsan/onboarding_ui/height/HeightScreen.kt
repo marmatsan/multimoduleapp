@@ -85,7 +85,7 @@ fun HeightScreenContent(
             Text(
                 text = stringResource(id = R.string.whats_your_height)
             )
-            Spacer(modifier = modifier.height(spacing.spaceMedium))
+            Spacer(modifier.height(spacing.spaceMedium))
             UnitTextField(
                 value = height,
                 onValueChange = {

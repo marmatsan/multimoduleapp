@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PreferencesData(
     val userInfo: UserInfo = UserInfo(),
-    val shouldShowOnboarding: Boolean = false
+    @Serializable
+    val showOnboarding: Boolean = true
 )

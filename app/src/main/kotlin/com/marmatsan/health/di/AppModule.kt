@@ -6,7 +6,6 @@ import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
 import com.marmatsan.core_data.preferences.DefaultPreferences
 import com.marmatsan.core_data.preferences.PreferencesDataSerializer
-import com.marmatsan.core_domain.model.UserInfo
 import com.marmatsan.core_domain.preferences.Preferences
 import com.marmatsan.core_domain.preferences.PreferencesData
 import com.marmatsan.core_domain.use_case.FilterOutDigits
@@ -57,6 +56,5 @@ object AppModule {
     fun provideFilterOutWeightUseCase(): FilterOutWeight {
         return FilterOutWeight()
     }
-
 
 }

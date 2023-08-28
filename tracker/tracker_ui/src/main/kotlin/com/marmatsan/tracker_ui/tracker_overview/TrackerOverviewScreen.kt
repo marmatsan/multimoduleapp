@@ -121,7 +121,7 @@ fun TrackerOverviewScreenContent(
                                 onDeleteClick(trackedFood)
                             }
                         )
-                        Spacer(modifier = Modifier.height(spacing.spaceMedium))
+                        Spacer(Modifier.height(spacing.spaceMedium))
                     }
                     AddButton(
                         modifier = Modifier.fillMaxWidth(),

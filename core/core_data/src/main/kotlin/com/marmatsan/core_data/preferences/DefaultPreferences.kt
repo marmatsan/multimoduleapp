@@ -4,7 +4,6 @@ import androidx.datastore.core.DataStore
 import com.marmatsan.core_domain.model.ActivityLevel
 import com.marmatsan.core_domain.model.Gender
 import com.marmatsan.core_domain.model.WeightGoal
-import com.marmatsan.core_domain.model.UserInfo
 import com.marmatsan.core_domain.preferences.Preferences
 import com.marmatsan.core_domain.preferences.PreferencesData
 import kotlinx.coroutines.flow.Flow
@@ -104,16 +103,15 @@ class DefaultPreferences @Inject constructor(
         }
     }
 
-    override suspend fun saveShouldShowOnboarding(shouldShow: Boolean) {
+    override suspend fun saveShowOnboarding(showOnboarding: Boolean) {
         dataStore.updateData {
             it.copy(
-                shouldShowOnboarding = shouldShow
+                showOnboarding = showOnboarding
             )
         }
     }
 
-    override suspend fun loadPreferencesData(): Flow<PreferencesData> {
+    override fun loadPreferencesData(): Flow<PreferencesData> {
         return dataStore.data
     }
-
 }

@@ -37,7 +37,8 @@ dependencies {
 
     /* Libraries */
     // Core
-    implementation(libs.androidx.core)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
     // Lifecycle
     implementation(libs.bundles.androidx.lifecycle)
     // Activity Compose

@@ -86,7 +86,7 @@ fun WeightScreenContent(
             Text(
                 text = stringResource(id = R.string.whats_your_weight)
             )
-            Spacer(modifier = modifier.height(spacing.spaceMedium))
+            Spacer(modifier.height(spacing.spaceMedium))
             UnitTextField(
                 value = weight,
                 onValueChange = {

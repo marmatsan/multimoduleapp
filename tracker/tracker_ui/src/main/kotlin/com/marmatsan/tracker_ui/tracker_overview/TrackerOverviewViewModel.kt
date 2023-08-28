@@ -1,6 +1,5 @@
 package com.marmatsan.tracker_ui.tracker_overview
 
-import android.os.Build.VERSION_CODES
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -21,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TrackerOverviewViewModel @Inject constructor(
-    preferences: Preferences,
+    private val preferences: Preferences,
     private val trackerUseCases: TrackerUseCases,
 ) : ViewModel() {
 
@@ -36,7 +35,7 @@ class TrackerOverviewViewModel @Inject constructor(
     init {
         refreshFoods()
         viewModelScope.launch {
-            preferences.saveShouldShowOnboarding(shouldShow = false)
+            preferences.saveShowOnboarding(false)
         }
     }
 

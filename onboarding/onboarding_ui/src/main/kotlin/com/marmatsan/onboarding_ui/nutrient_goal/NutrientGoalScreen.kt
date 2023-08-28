@@ -89,7 +89,7 @@ fun NutrientGoalContent(
             Text(
                 text = stringResource(id = R.string.what_are_your_nutrient_goals)
             )
-            Spacer(modifier = modifier.height(spacing.spaceMedium))
+            Spacer(modifier.height(spacing.spaceMedium))
             UnitTextField(
                 value = state.carbsPct,
                 onValueChange = {
@@ -97,7 +97,7 @@ fun NutrientGoalContent(
                 },
                 unit = stringResource(id = R.string.percent_carbs)
             )
-            Spacer(modifier = modifier.height(spacing.spaceMedium))
+            Spacer(modifier.height(spacing.spaceMedium))
             UnitTextField(
                 value = state.proteinPct,
                 onValueChange = {
@@ -105,7 +105,7 @@ fun NutrientGoalContent(
                 },
                 unit = stringResource(id = R.string.percent_proteins)
             )
-            Spacer(modifier = modifier.height(spacing.spaceMedium))
+            Spacer(modifier.height(spacing.spaceMedium))
             UnitTextField(
                 value = state.fatPct,
                 onValueChange = {

@@ -79,7 +79,7 @@ fun GoalScreenContent(
                 Text(
                     text = stringResource(id = R.string.lose_keep_or_gain_weight)
                 )
-                Spacer(modifier = modifier.height(spacing.spaceMedium))
+                Spacer(modifier.height(spacing.spaceMedium))
                 Row {
                     SelectableButton(
                         text = stringResource(id = R.string.lose),

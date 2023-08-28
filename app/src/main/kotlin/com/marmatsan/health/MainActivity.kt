@@ -1,6 +1,8 @@
 package com.marmatsan.health
 
 import android.os.Bundle
+import android.view.ViewAnimationUtils
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,12 +13,17 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.core.animation.doOnEnd
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.marmatsan.core_domain.navigation.Route
+import com.marmatsan.core_domain.preferences.Preferences
+import com.marmatsan.core_domain.preferences.PreferencesData
 import com.marmatsan.health.navigation.navigate
 import com.marmatsan.health.navigation.navigateBack
 import com.marmatsan.health.ui.theme.HealthTheme
@@ -31,12 +38,61 @@ import com.marmatsan.onboarding_ui.welcome.WelcomeScreen
 import com.marmatsan.tracker_ui.search.SearchScreen
 import com.marmatsan.tracker_ui.tracker_overview.TrackerOverviewScreen
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.time.Clock
+import java.time.Instant
+import java.time.temporal.ChronoUnit
+import javax.inject.Inject
+import kotlin.math.hypot
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var preferences: Preferences
+
     @OptIn(ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        installSplashScreen().setOnExitAnimationListener { splashScreenView ->
+
+            lifecycleScope.launch {
+                preferencesData = preferences.loadPreferencesData().first()
+            }
+
+            val centerX = splashScreenView.view.width / 2
+            val centerY = splashScreenView.view.height / 2
+            val startRadius = hypot(centerX.toDouble(), centerY.toDouble()).toFloat()
+            val endRadius = 0f
+
+            val splashScreenAnimationEndTime =
+                Instant.ofEpochMilli(
+                    splashScreenView.iconAnimationStartMillis + splashScreenView.iconAnimationDurationMillis
+                )
+
+            val delay = Instant.now(Clock.systemUTC()).until(
+                splashScreenAnimationEndTime,
+                ChronoUnit.MILLIS
+            )
+
+            val circularReveal = ViewAnimationUtils.createCircularReveal(
+                splashScreenView.view, centerX, centerY, startRadius, endRadius
+            ).apply {
+                startDelay = if (delay > 0) delay else 0
+                duration = 300L
+                interpolator = AccelerateDecelerateInterpolator()
+                doOnEnd { splashScreenView.remove() }
+            }
+
+            circularReveal.start()
+        }
+
         setContent {
             HealthTheme {
                 val snackbarHostState = remember { SnackbarHostState() }
@@ -47,7 +103,7 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController() // TODO: Improve navigation
                     NavHost(
                         navController = navController,
-                        startDestination = Route.OnBoarding.WELCOME // TODO: Route.OnBoarding.WELCOME
+                        startDestination = if (preferencesData.showOnboarding) Route.OnBoarding.WELCOME else Route.Tracker.OVERVIEW
                     ) {
                         composable(Route.OnBoarding.WELCOME) {
                             WelcomeScreen(

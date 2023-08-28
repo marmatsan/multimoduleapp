@@ -79,7 +79,7 @@ fun ActivityScreenContent(
                 Text(
                     text = stringResource(id = R.string.whats_your_activity_level)
                 )
-                Spacer(modifier = modifier.height(spacing.spaceMedium))
+                Spacer(modifier.height(spacing.spaceMedium))
                 Row {
                     SelectableButton(
                         text = stringResource(id = R.string.low),

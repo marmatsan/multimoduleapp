@@ -88,7 +88,7 @@ fun AgeScreenContent(
             Text(
                 text = stringResource(id = R.string.whats_your_age)
             )
-            Spacer(modifier = modifier.height(spacing.spaceMedium))
+            Spacer(modifier.height(spacing.spaceMedium))
             UnitTextField(
                 value = age,
                 onValueChange = {

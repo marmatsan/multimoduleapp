@@ -7,7 +7,7 @@ import com.marmatsan.core_domain.model.UserInfo
 import kotlinx.coroutines.flow.Flow
 
 interface Preferences {
-
+    // Save data
     suspend fun saveGender(gender: Gender)
     suspend fun saveAge(age: Int)
     suspend fun saveWeight(weight: Float)
@@ -17,8 +17,8 @@ interface Preferences {
     suspend fun saveCarbRatio(carbRatio: Float)
     suspend fun saveProteinRatio(proteinRatio: Float)
     suspend fun saveFatRatio(fatRatio: Float)
+    suspend fun saveShowOnboarding(showOnboarding: Boolean)
 
-    suspend fun loadPreferencesData(): Flow<PreferencesData>
-
-    suspend fun saveShouldShowOnboarding(shouldShow: Boolean)
+    // Load data
+    fun loadPreferencesData(): Flow<PreferencesData>
 }

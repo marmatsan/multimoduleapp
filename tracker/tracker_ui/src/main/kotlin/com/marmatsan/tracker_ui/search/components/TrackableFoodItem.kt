@@ -83,7 +83,7 @@ fun TrackableFoodItem(
                         .size(100.dp)
                         .clip(RoundedCornerShape(topStart = 5.dp))
                 )
-                Spacer(modifier = Modifier.width(spacing.spaceMedium))
+                Spacer(Modifier.width(spacing.spaceMedium))
                 Column(
                     modifier = Modifier.align(Alignment.CenterVertically)
                 ) {
@@ -93,7 +93,7 @@ fun TrackableFoodItem(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
-                    Spacer(modifier = Modifier.height(spacing.spaceSmall))
+                    Spacer(Modifier.height(spacing.spaceSmall))
                     Text(
                         text = stringResource(
                             id = R.string.kcal_per_100g,
@@ -162,7 +162,7 @@ fun TrackableFoodItem(
                             .alignBy(LastBaseline)
                             .padding(spacing.spaceMedium)
                     )
-                    Spacer(modifier = Modifier.width(spacing.spaceExtraSmall))
+                    Spacer(Modifier.width(spacing.spaceExtraSmall))
                     Text(
                         text = stringResource(id = R.string.grams),
                         style = MaterialTheme.typography.bodyLarge,

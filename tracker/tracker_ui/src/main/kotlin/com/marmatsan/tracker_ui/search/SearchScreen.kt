@@ -175,7 +175,7 @@ fun SearchScreenContentPreview() {
         onSearch = { },
         onFocusChanged = { },
         onToggleTrackableFood = {},
-        onAmountChange = { trackableFood, s -> },
+        onAmountChange = { _, _ -> },
         onTrack = {}
     )
 }

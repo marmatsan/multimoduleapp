@@ -10,14 +10,28 @@ open class Library(
     object AndroidX {
         private const val androidx = "androidx"
 
-        object Core : Library(
-            name = "$androidx.core",
-            group = "$androidx.core",
-            artifacts = listOf(
-                "core-ktx"
-            ),
-            version = "1.10.1"
-        )
+        object Core {
+            private const val group = "$androidx.core"
+
+            object Ktx : Library(
+                name = "$group.ktx",
+                group = group,
+                artifacts = listOf(
+                    "core-ktx"
+                ),
+                version = "1.10.1"
+            )
+
+            object SplashScreen : Library(
+                name = "$group.splashscreen",
+                group = group,
+                artifacts = listOf(
+                    "core-splashscreen"
+                ),
+                version = "1.0.1"
+            )
+
+        }
 
         object Navigation : Library(
             name = "$androidx.navigation",

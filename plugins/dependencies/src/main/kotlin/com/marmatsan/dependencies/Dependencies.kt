@@ -72,7 +72,8 @@ class Dependencies : Plugin<Settings> {
     object Libraries : Catalog(
         name = "libs",
         dependencies = listOf(
-            LibraryDep.AndroidX.Core,
+            LibraryDep.AndroidX.Core.Ktx,
+            LibraryDep.AndroidX.Core.SplashScreen,
             LibraryDep.AndroidX.Navigation,
             LibraryDep.AndroidX.Hilt,
             LibraryDep.AndroidX.Activity,

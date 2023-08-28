@@ -46,7 +46,7 @@ fun AddButton(
             contentDescription = stringResource(id = R.string.add),
             tint = color
         )
-        Spacer(modifier = Modifier.width(spacing.spaceMedium))
+        Spacer(Modifier.width(spacing.spaceMedium))
         Text(
             text = text,
             color = color

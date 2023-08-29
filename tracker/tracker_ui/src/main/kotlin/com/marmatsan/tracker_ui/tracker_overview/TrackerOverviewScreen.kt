@@ -10,7 +10,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.annotation.ExperimentalCoilApi
@@ -19,7 +18,6 @@ import com.marmatsan.core_ui.LocalSpacing
 import com.marmatsan.tracker_domain.model.TrackedFood
 import com.marmatsan.tracker_ui.R
 import com.marmatsan.tracker_ui.tracker_overview.components.*
-import java.util.*
 
 @Composable
 fun TrackerOverviewScreen(
@@ -27,9 +25,8 @@ fun TrackerOverviewScreen(
     modifier: Modifier = Modifier,
     viewModel: TrackerOverviewViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
 
-    LaunchedEffect(context) {
+    LaunchedEffect(Unit) {
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.Navigate -> onNavigate(event)
@@ -53,8 +50,8 @@ fun TrackerOverviewScreen(
         onDeleteClick = {
             viewModel.onEvent(TrackerOverviewEvent.OnDeleteTrackedFoodClick(it))
         },
-        onAddFood = {
-            viewModel.onEvent(TrackerOverviewEvent.OnAddFoodClick(it))
+        onAddFood = { mealName ->
+            viewModel.onEvent(TrackerOverviewEvent.OnAddFoodClick(mealName))
         }
     )
 }
@@ -68,7 +65,7 @@ fun TrackerOverviewScreenContent(
     onNextDayClick: () -> Unit,
     onToggleClick: (MealItem) -> Unit,
     onDeleteClick: (TrackedFood) -> Unit,
-    onAddFood: (MealItem) -> Unit
+    onAddFood: (String) -> Unit
 ) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
@@ -123,7 +120,7 @@ fun TrackerOverviewScreenContent(
                             mealItem.name.asString(context).lowercase()
                         ),
                         onClick = {
-                            onAddFood(mealItem)
+                            onAddFood(mealItem.name.asString(context))
                         }
                     )
                 }

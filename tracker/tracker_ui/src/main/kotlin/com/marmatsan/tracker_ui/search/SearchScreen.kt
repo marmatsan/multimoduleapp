@@ -1,8 +1,10 @@
 package com.marmatsan.tracker_ui.search
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
@@ -12,12 +14,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.annotation.ExperimentalCoilApi
 import com.marmatsan.core_domain.util.UiEvent
@@ -43,7 +47,7 @@ fun SearchScreen(
     val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    LaunchedEffect(keyboardController) {
+    LaunchedEffect(Unit) {
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.ShowSnackBar -> {
@@ -102,37 +106,54 @@ fun SearchScreenContent(
     onFocusChanged: (FocusState) -> Unit,
     onToggleTrackableFood: (TrackableFood) -> Unit,
     onAmountChange: (TrackableFood, String) -> Unit,
-    onTrack: (TrackableFood) -> Unit
+    onTrack: (TrackableFood) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val spacing = LocalSpacing.current
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(spacing.spaceMedium)
+        modifier = modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = stringResource(id = R.string.add_meal, mealName.lowercase()),
-            style = MaterialTheme.typography.bodyMedium
-        )
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primary)
+                .padding(
+                    top = spacing.spaceMedium,
+                    bottom = spacing.spaceLarge
+                ),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(id = R.string.add_meal, mealName),
+                color = MaterialTheme.colorScheme.onPrimary,
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(Modifier.height(spacing.spaceMedium))
+            SearchTextField(
+                modifier = modifier.padding(
+                    start = spacing.spaceSmall,
+                    end = spacing.spaceSmall
+                ),
+                text = state.query,
+                shouldShowHint = state.isHintVisible,
+                onValueChange = {
+                    onValueChange(it)
+                },
+                onSearch = {
+                    onSearch()
+                },
+                onFocusChanged = {
+                    onFocusChanged(it)
+                }
+            )
+        }
         Spacer(Modifier.height(spacing.spaceMedium))
-        SearchTextField(
-            text = state.query,
-            shouldShowHint = state.isHintVisible,
-            onValueChange = {
-                onValueChange(it)
-            },
-            onSearch = {
-                onSearch()
-            },
-            onFocusChanged = {
-                onFocusChanged(it)
-            }
-        )
-        Spacer(Modifier.height(spacing.spaceMedium))
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn {
             items(state.trackableFood) { trackableFoodUiState ->
                 TrackableFoodItem(
+                    modifier = Modifier.fillMaxWidth(),
                     trackableFoodUiState = trackableFoodUiState,
                     onClick = {
                         onToggleTrackableFood(trackableFoodUiState.food)
@@ -142,13 +163,11 @@ fun SearchScreenContent(
                     },
                     onTrack = {
                         onTrack(trackableFoodUiState.food)
-                    },
-                    modifier = Modifier.fillMaxWidth()
+                    }
                 )
             }
         }
         Box(
-            modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             when {

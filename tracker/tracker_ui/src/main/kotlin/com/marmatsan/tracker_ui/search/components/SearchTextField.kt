@@ -33,13 +33,13 @@ import com.marmatsan.tracker_ui.R
 
 @Composable
 fun SearchTextField(
-    modifier: Modifier = Modifier,
-    hint: String = stringResource(id = R.string.search),
-    shouldShowHint: Boolean = false,
     text: String,
     onValueChange: (String) -> Unit,
     onSearch: () -> Unit,
-    onFocusChanged: (FocusState) -> Unit
+    onFocusChanged: (FocusState) -> Unit,
+    modifier: Modifier = Modifier,
+    shouldShowHint: Boolean = false,
+    hint: String = stringResource(id = R.string.search),
 ) {
     val spacing = LocalSpacing.current
     Box(
@@ -66,7 +66,7 @@ fun SearchTextField(
                     elevation = 2.dp,
                     shape = RoundedCornerShape(5.dp)
                 )
-                .background(MaterialTheme.colorScheme.primary)
+                .background(MaterialTheme.colorScheme.secondary)
                 .fillMaxWidth()
                 .padding(all = spacing.spaceMedium)
                 .onFocusChanged { onFocusChanged(it) }
@@ -74,9 +74,9 @@ fun SearchTextField(
         if (shouldShowHint) {
             Text(
                 text = hint,
+                color = MaterialTheme.colorScheme.onSecondary,
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Light,
-                color = Color.LightGray,
                 modifier = Modifier
                     .align(Alignment.CenterStart)
                     .padding(start = spacing.spaceMedium)
@@ -89,7 +89,7 @@ fun SearchTextField(
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = stringResource(id = R.string.search),
-                tint = MaterialTheme.colorScheme.onPrimary
+                tint = MaterialTheme.colorScheme.onSecondary
             )
         }
     }

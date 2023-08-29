@@ -5,7 +5,7 @@ import com.marmatsan.core_domain.util.UiText
 import com.marmatsan.tracker_domain.model.Meal
 import com.marmatsan.tracker_ui.R
 
-data class MealUi(
+data class MealItem(
     val name: UiText,
     @DrawableRes
     val drawableRes: Int,
@@ -18,22 +18,22 @@ data class MealUi(
 )
 
 val defaultMeals = listOf(
-    MealUi(
+    MealItem(
         name = UiText.StringResource(R.string.breakfast),
         drawableRes = R.drawable.ic_breakfast,
         meal = Meal.Breakfast
     ),
-    MealUi(
+    MealItem(
         name = UiText.StringResource(R.string.lunch),
         drawableRes = R.drawable.ic_lunch,
         meal = Meal.Lunch
     ),
-    MealUi(
+    MealItem(
         name = UiText.StringResource(R.string.dinner),
         drawableRes = R.drawable.ic_dinner,
         meal = Meal.Dinner
     ),
-    MealUi(
+    MealItem(
         name = UiText.StringResource(R.string.snacks),
         drawableRes = R.drawable.ic_snack,
         meal = Meal.Snack

@@ -10,6 +10,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.annotation.ExperimentalCoilApi
@@ -18,11 +19,12 @@ import com.marmatsan.core_ui.LocalSpacing
 import com.marmatsan.tracker_domain.model.TrackedFood
 import com.marmatsan.tracker_ui.R
 import com.marmatsan.tracker_ui.tracker_overview.components.*
+import java.util.*
 
 @Composable
 fun TrackerOverviewScreen(
-    modifier: Modifier = Modifier,
     onNavigate: (UiEvent.Navigate) -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: TrackerOverviewViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -49,9 +51,7 @@ fun TrackerOverviewScreen(
             viewModel.onEvent(TrackerOverviewEvent.OnToggleMealClick(it))
         },
         onDeleteClick = {
-            viewModel.onEvent(
-                TrackerOverviewEvent.OnDeleteTrackedFoodClick(it)
-            )
+            viewModel.onEvent(TrackerOverviewEvent.OnDeleteTrackedFoodClick(it))
         },
         onAddFood = {
             viewModel.onEvent(TrackerOverviewEvent.OnAddFoodClick(it))
@@ -66,9 +66,9 @@ fun TrackerOverviewScreenContent(
     state: TrackerOverviewState,
     onPreviousDayClick: () -> Unit,
     onNextDayClick: () -> Unit,
-    onToggleClick: (MealUi) -> Unit,
+    onToggleClick: (MealItem) -> Unit,
     onDeleteClick: (TrackedFood) -> Unit,
-    onAddFood: (MealUi) -> Unit
+    onAddFood: (MealItem) -> Unit
 ) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
@@ -76,18 +76,13 @@ fun TrackerOverviewScreenContent(
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .padding(
-                bottom = spacing.spaceMedium
-            )
             .background(MaterialTheme.colorScheme.background)
     ) {
         item {
             NutrientsHeader(
                 state = state
             )
-            Spacer(
-                modifier = Modifier.height(spacing.spaceMedium)
-            )
+            Spacer(Modifier.height(spacing.spaceMedium))
             DaySelector(
                 modifier = modifier
                     .fillMaxWidth()
@@ -98,21 +93,19 @@ fun TrackerOverviewScreenContent(
                 onPreviousDayClick = onPreviousDayClick,
                 onNextDayClick = onNextDayClick
             )
-            Spacer(
-                modifier = Modifier.height(spacing.spaceMedium)
-            )
+            Spacer(Modifier.height(spacing.spaceMedium))
         }
-        items(state.meals) { mealUi ->
+        items(state.meals) { mealItem ->
             ExpandableMeal(
                 modifier = Modifier.fillMaxWidth(),
-                meal = mealUi,
+                mealItem = mealItem,
                 onToggleClick = {
-                    onToggleClick(mealUi)
+                    onToggleClick(mealItem)
                 }
             ) {
+                // Tracked food list for the selected meal type (breakfast, lunch, etc)
                 Column(
-                    modifier = Modifier
-                        .padding(horizontal = spacing.spaceSmall)
+                    modifier = Modifier.padding(horizontal = spacing.spaceSmall)
                 ) {
                     state.trackedFoods.forEach { trackedFood ->
                         TrackedFoodItem(
@@ -127,10 +120,10 @@ fun TrackerOverviewScreenContent(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(
                             id = R.string.add_meal,
-                            mealUi.name.asString(context)
+                            mealItem.name.asString(context).lowercase()
                         ),
                         onClick = {
-                            onAddFood(mealUi)
+                            onAddFood(mealItem)
                         }
                     )
                 }

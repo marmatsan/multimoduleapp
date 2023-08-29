@@ -33,9 +33,7 @@ fun WelcomeScreen(
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleLarge
         )
-        Spacer(
-            modifier = modifier.height(spacing.spaceMedium)
-        )
+        Spacer(Modifier.height(spacing.spaceMedium))
         ActionButton(
             modifier = modifier.align(Alignment.CenterHorizontally),
             text = stringResource(id = R.string.next),

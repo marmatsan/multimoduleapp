@@ -24,13 +24,13 @@ import com.marmatsan.core_ui.LocalSpacing
 import com.marmatsan.tracker_domain.model.Meal
 import com.marmatsan.tracker_ui.components.NutrientInfo
 import com.marmatsan.tracker_ui.components.UnitDisplay
-import com.marmatsan.tracker_ui.tracker_overview.MealUi
+import com.marmatsan.tracker_ui.tracker_overview.MealItem
 import com.marmatsan.tracker_ui.R
 
 @Composable
 fun ExpandableMeal(
     modifier: Modifier = Modifier,
-    meal: MealUi,
+    mealItem: MealItem,
     onToggleClick: () -> Unit,
     content: @Composable () -> Unit
 ) {
@@ -48,12 +48,10 @@ fun ExpandableMeal(
         ) {
             Image(
                 modifier = Modifier.size(100.dp),
-                painter = painterResource(id = meal.drawableRes),
-                contentDescription = meal.name.asString(context)
+                painter = painterResource(id = mealItem.drawableRes),
+                contentDescription = mealItem.name.asString(context)
             )
-            Spacer(
-                modifier = Modifier.width(spacing.spaceMedium)
-            )
+            Spacer(Modifier.width(spacing.spaceMedium))
             Column(
                 modifier = Modifier.weight(1f)
             ) {
@@ -62,27 +60,25 @@ fun ExpandableMeal(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = meal.name.asString(context),
+                        text = mealItem.name.asString(context),
                         color = MaterialTheme.colorScheme.onBackground
                     )
                     Icon(
-                        imageVector = if (meal.isExpanded) {
+                        imageVector = if (mealItem.isExpanded) {
                             Icons.Default.KeyboardArrowUp
                         } else Icons.Default.KeyboardArrowDown,
-                        contentDescription = if (meal.isExpanded) {
+                        contentDescription = if (mealItem.isExpanded) {
                             stringResource(id = R.string.collapse)
                         } else stringResource(id = R.string.extend)
                     )
                 }
-                Spacer(
-                    modifier = Modifier.height(spacing.spaceSmall)
-                )
+                Spacer(Modifier.height(spacing.spaceSmall))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     UnitDisplay(
-                        amount = meal.calories,
+                        amount = mealItem.calories,
                         amountColor = MaterialTheme.colorScheme.onBackground,
                         unitColor = MaterialTheme.colorScheme.onBackground,
                         unit = stringResource(id = R.string.kcal),
@@ -91,33 +87,27 @@ fun ExpandableMeal(
                     Row {
                         NutrientInfo(
                             name = stringResource(id = R.string.carbs),
-                            amount = meal.carbs,
+                            amount = mealItem.carbs,
                             unit = stringResource(id = R.string.grams)
                         )
-                        Spacer(
-                            modifier = Modifier.width(spacing.spaceSmall)
-                        )
+                        Spacer(Modifier.width(spacing.spaceSmall))
                         NutrientInfo(
                             name = stringResource(id = R.string.protein),
-                            amount = meal.protein,
+                            amount = mealItem.protein,
                             unit = stringResource(id = R.string.grams)
                         )
-                        Spacer(
-                            modifier = Modifier.width(spacing.spaceSmall)
-                        )
+                        Spacer(Modifier.width(spacing.spaceSmall))
                         NutrientInfo(
                             name = stringResource(id = R.string.fat),
-                            amount = meal.fat,
+                            amount = mealItem.fat,
                             unit = stringResource(id = R.string.grams)
                         )
                     }
                 }
             }
         }
-        Spacer(
-            modifier = Modifier.height(spacing.spaceMedium)
-        )
-        AnimatedVisibility(visible = meal.isExpanded) {
+        Spacer(Modifier.height(spacing.spaceMedium))
+        AnimatedVisibility(visible = mealItem.isExpanded) {
             content()
         }
     }
@@ -127,7 +117,7 @@ fun ExpandableMeal(
 @Composable
 fun ExpandableMealPreview() {
     ExpandableMeal(
-        meal = MealUi(
+        mealItem = MealItem(
             name = UiText.DynamicString("Breakfast"),
             drawableRes = R.drawable.ic_breakfast,
             meal = Meal.Breakfast

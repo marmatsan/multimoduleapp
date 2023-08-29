@@ -112,7 +112,7 @@ fun SearchScreenContent(
             .padding(spacing.spaceMedium)
     ) {
         Text(
-            text = stringResource(id = R.string.add_meal, mealName),
+            text = stringResource(id = R.string.add_meal, mealName.lowercase()),
             style = MaterialTheme.typography.bodyMedium
         )
         Spacer(Modifier.height(spacing.spaceMedium))
@@ -169,7 +169,7 @@ fun SearchScreenContent(
 @Composable
 fun SearchScreenContentPreview() {
     SearchScreenContent(
-        mealName = "Rice",
+        mealName = "breakfast",
         state = SearchState(),
         onValueChange = { },
         onSearch = { },

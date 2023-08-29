@@ -88,9 +88,7 @@ fun GoalScreenContent(
                             onGoalEnter(WeightGoal.LoseWeight)
                         }
                     )
-                    Spacer(
-                        modifier = modifier.width(spacing.spaceMedium)
-                    )
+                    Spacer(Modifier.width(spacing.spaceMedium))
                     SelectableButton(
                         text = stringResource(id = R.string.keep),
                         isSelected = selectedWeightGoal is WeightGoal.KeepWeight,
@@ -98,9 +96,7 @@ fun GoalScreenContent(
                             onGoalEnter(WeightGoal.KeepWeight)
                         }
                     )
-                    Spacer(
-                        modifier = modifier.width(spacing.spaceMedium)
-                    )
+                    Spacer(Modifier.width(spacing.spaceMedium))
                     SelectableButton(
                         text = stringResource(id = R.string.gain),
                         isSelected = selectedWeightGoal is WeightGoal.GainWeight,

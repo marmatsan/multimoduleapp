@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -62,10 +63,6 @@ class MainActivity : ComponentActivity() {
 
         installSplashScreen().setOnExitAnimationListener { splashScreenView ->
 
-            lifecycleScope.launch {
-                preferencesData = preferences.loadPreferencesData().first()
-            }
-
             val centerX = splashScreenView.view.width / 2
             val centerY = splashScreenView.view.height / 2
             val startRadius = hypot(centerX.toDouble(), centerY.toDouble()).toFloat()
@@ -95,6 +92,11 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             HealthTheme {
+
+                // TODO: Sometimes, a weird visual effect with the splash screen happens
+                val showOnboarding =
+                    preferences.loadPreferencesData().collectAsState(initial = PreferencesData()).value.showOnboarding
+
                 val snackbarHostState = remember { SnackbarHostState() }
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
@@ -103,7 +105,7 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController() // TODO: Improve navigation
                     NavHost(
                         navController = navController,
-                        startDestination = if (preferencesData.showOnboarding) Route.OnBoarding.WELCOME else Route.Tracker.OVERVIEW
+                        startDestination = if (showOnboarding) Route.OnBoarding.WELCOME else Route.Tracker.OVERVIEW
                     ) {
                         composable(Route.OnBoarding.WELCOME) {
                             WelcomeScreen(

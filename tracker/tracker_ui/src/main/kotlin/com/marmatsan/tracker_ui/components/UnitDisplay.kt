@@ -32,9 +32,7 @@ fun UnitDisplay(
             fontSize = amountTextSize,
             modifier = Modifier.alignBy(LastBaseline)
         )
-        Spacer(
-            modifier = Modifier.width(spacing.spaceExtraSmall)
-        )
+        Spacer(Modifier.width(spacing.spaceExtraSmall))
         Text(
             text = unit,
             color = unitColor,

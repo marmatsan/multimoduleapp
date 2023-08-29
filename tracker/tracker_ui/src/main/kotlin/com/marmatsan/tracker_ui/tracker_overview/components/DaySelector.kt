@@ -2,11 +2,13 @@ package com.marmatsan.tracker_ui.tracker_overview.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -40,7 +42,8 @@ fun DaySelector(
             )
         }
         Text(
-            text = parseDateText(date = date)
+            text = parseDateText(date = date),
+            style = MaterialTheme.typography.bodyLarge
         )
         IconButton(
             onClick = {
@@ -70,6 +73,7 @@ private fun parseDateText(date: LocalDate): String {
 @Composable
 fun DaySelectorPreview() {
     DaySelector(
+        modifier = Modifier.fillMaxWidth(),
         date = LocalDate.now(),
         onPreviousDayClick = { },
         onNextDayClick = { }

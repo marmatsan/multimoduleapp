@@ -68,9 +68,7 @@ fun NutrientsHeader(
                 )
             }
         }
-        Spacer(
-            modifier = Modifier.height(spacing.spaceSmall)
-        )
+        Spacer(Modifier.height(spacing.spaceSmall))
         NutrientsBar(
             carbs = state.totalCarbs,
             protein = state.totalProtein,
@@ -78,9 +76,7 @@ fun NutrientsHeader(
             calories = state.totalCalories,
             calorieGoal = state.caloriesGoal
         )
-        Spacer(
-            modifier = Modifier.height(spacing.spaceLarge)
-        )
+        Spacer(Modifier.height(spacing.spaceLarge))
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween

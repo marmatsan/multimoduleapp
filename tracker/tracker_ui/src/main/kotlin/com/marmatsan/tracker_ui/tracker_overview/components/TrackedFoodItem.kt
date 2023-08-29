@@ -71,9 +71,7 @@ fun TrackedFoodItem(
                     )
                 )
         )
-        Spacer(
-            modifier = Modifier.width(spacing.spaceMedium)
-        )
+        Spacer(Modifier.width(spacing.spaceMedium))
         Column(
             modifier = Modifier.weight(1f)
         ) {
@@ -82,9 +80,7 @@ fun TrackedFoodItem(
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 2
             )
-            Spacer(
-                modifier = Modifier.height(spacing.spaceExtraSmall)
-            )
+            Spacer(Modifier.height(spacing.spaceExtraSmall))
             Text(
                 text = stringResource(
                     id = R.string.nutrient_info,
@@ -93,9 +89,7 @@ fun TrackedFoodItem(
                 )
             )
         }
-        Spacer(
-            modifier = Modifier.width(spacing.spaceMedium)
-        )
+        Spacer(Modifier.width(spacing.spaceMedium))
         Column(
             modifier = Modifier.fillMaxHeight(),
             verticalArrangement = Arrangement.Center
@@ -107,9 +101,7 @@ fun TrackedFoodItem(
                     .align(Alignment.End)
                     .clickable { onDeleteClick() }
             )
-            Spacer(
-                modifier = Modifier.height(spacing.spaceExtraSmall)
-            )
+            Spacer(Modifier.height(spacing.spaceExtraSmall))
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -120,9 +112,7 @@ fun TrackedFoodItem(
                     amountTextSize = 16.sp,
                     unitTextSize = 12.sp
                 )
-                Spacer(
-                    modifier = Modifier.width(spacing.spaceSmall)
-                )
+                Spacer(Modifier.width(spacing.spaceSmall))
                 NutrientInfo(
                     name = stringResource(id = R.string.protein),
                     amount = trackedFood.protein,
@@ -130,9 +120,7 @@ fun TrackedFoodItem(
                     amountTextSize = 16.sp,
                     unitTextSize = 12.sp
                 )
-                Spacer(
-                    modifier = Modifier.width(spacing.spaceSmall)
-                )
+                Spacer(Modifier.width(spacing.spaceSmall))
                 NutrientInfo(
                     name = stringResource(id = R.string.fat),
                     amount = trackedFood.fat,

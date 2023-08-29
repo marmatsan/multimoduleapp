@@ -41,24 +41,27 @@ class TrackerOverviewViewModel @Inject constructor(
 
     fun onEvent(event: TrackerOverviewEvent) {
         when (event) {
+            is TrackerOverviewEvent.OnToggleMealClick -> {
+                state = state.copy(
+                    meals = state.meals.map {
+                        if (it.name == event.mealItem.name) {
+                            it.copy(isExpanded = !it.isExpanded)
+                        } else it
+                    }
+                )
+            }
+
             is TrackerOverviewEvent.OnAddFoodClick -> {
                 viewModelScope.launch {
                     _uiEvent.send(
                         UiEvent.Navigate(
                             route = Route.Tracker.SEARCH
-                                    + "/${event.meal.name}"
+                                    + "/${event.mealItem.name}"
                                     + "/${state.date.dayOfMonth}"
                                     + "/${state.date.monthValue}"
                                     + "/${state.date.year}"
                         )
                     )
-                }
-            }
-
-            is TrackerOverviewEvent.OnDeleteTrackedFoodClick -> {
-                viewModelScope.launch {
-                    trackerUseCases.deleteTrackedFood(event.trackedFood)
-                    refreshFoods()
                 }
             }
 
@@ -76,14 +79,11 @@ class TrackerOverviewViewModel @Inject constructor(
                 refreshFoods()
             }
 
-            is TrackerOverviewEvent.OnToggleMealClick -> {
-                state = state.copy(
-                    meals = state.meals.map {
-                        if (it.name == event.meal.name) {
-                            it.copy(isExpanded = !it.isExpanded)
-                        } else it
-                    }
-                )
+            is TrackerOverviewEvent.OnDeleteTrackedFoodClick -> {
+                viewModelScope.launch {
+                    trackerUseCases.deleteTrackedFood(event.trackedFood)
+                    refreshFoods()
+                }
             }
         }
     }

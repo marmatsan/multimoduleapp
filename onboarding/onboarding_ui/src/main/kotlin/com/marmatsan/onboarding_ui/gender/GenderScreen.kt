@@ -88,9 +88,7 @@ fun GenderScreenContent(
                         onGenderEnter(Gender.Male)
                     }
                 )
-                Spacer(
-                    modifier = modifier.width(spacing.spaceMedium)
-                )
+                Spacer(Modifier.width(spacing.spaceMedium))
                 SelectableButton(
                     text = stringResource(id = R.string.female),
                     isSelected = selectedGender is Gender.Female,

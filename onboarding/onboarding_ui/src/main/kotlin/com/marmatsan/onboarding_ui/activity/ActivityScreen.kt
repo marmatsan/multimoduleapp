@@ -79,7 +79,7 @@ fun ActivityScreenContent(
                 Text(
                     text = stringResource(id = R.string.whats_your_activity_level)
                 )
-                Spacer(modifier.height(spacing.spaceMedium))
+                Spacer(Modifier.height(spacing.spaceMedium))
                 Row {
                     SelectableButton(
                         text = stringResource(id = R.string.low),
@@ -88,8 +88,7 @@ fun ActivityScreenContent(
                             onActivityLeveEnter(ActivityLevel.Low)
                         }
                     )
-                    Spacer(
-                        modifier = modifier.width(spacing.spaceMedium)
+                    Spacer(Modifier.width(spacing.spaceMedium)
                     )
                     SelectableButton(
                         text = stringResource(id = R.string.medium),
@@ -98,9 +97,7 @@ fun ActivityScreenContent(
                             onActivityLeveEnter(ActivityLevel.Medium)
                         }
                     )
-                    Spacer(
-                        modifier = modifier.width(spacing.spaceMedium)
-                    )
+                    Spacer(Modifier.width(spacing.spaceMedium))
                     SelectableButton(
                         text = stringResource(id = R.string.high),
                         isSelected = selectedActivityLevel is ActivityLevel.High,

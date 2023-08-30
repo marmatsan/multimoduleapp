@@ -10,7 +10,7 @@ android {
             buildConfigField(
                 type = "String",
                 name = "BASE_URL",
-                value = "\"https://world.openfoodfacts.org/\""
+                value = "\"https://world.openfoodfacts.org\""
             )
         }
     }

@@ -50,7 +50,6 @@
     <string name="error_age_cant_be_empty">The age can\'t be empty</string>
     <string name="error_height_cant_be_empty">The height can\'t be empty</string>
     <string name="error_weight_cant_be_empty">The weight can\'t be empty</string>
-    <string name="error_something_went_wrong">Oops, something went wrong!</string>
     <string name="error_invalid_values">These are not valid values</string>
     <string name="error_not_100_percent">The values must add up to 100%</string>
 </resources>

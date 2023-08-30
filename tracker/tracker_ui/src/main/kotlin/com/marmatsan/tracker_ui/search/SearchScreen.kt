@@ -126,7 +126,7 @@ fun SearchScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(id = R.string.add_meal, mealName),
+                text = stringResource(id = R.string.add_meal, mealName.lowercase()),
                 color = MaterialTheme.colorScheme.onPrimary,
                 style = MaterialTheme.typography.titleMedium
             )
@@ -150,33 +150,39 @@ fun SearchScreenContent(
             )
         }
         Spacer(Modifier.height(spacing.spaceMedium))
-        LazyColumn {
-            items(state.trackableFood) { trackableFoodUiState ->
-                TrackableFoodItem(
-                    modifier = Modifier.fillMaxWidth(),
-                    trackableFoodUiState = trackableFoodUiState,
-                    onClick = {
-                        onToggleTrackableFood(trackableFoodUiState.food)
-                    },
-                    onAmountChange = {
-                        onAmountChange(trackableFoodUiState.food, it)
-                    },
-                    onTrack = {
-                        onTrack(trackableFoodUiState.food)
+        if (state.isSearching || state.trackableFood.isEmpty()) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                when {
+                    state.isSearching -> CircularProgressIndicator()
+                    state.trackableFood.isEmpty() -> {
+                        Text(
+                            text = stringResource(id = R.string.no_results),
+                            style = MaterialTheme.typography.bodyLarge,
+                            textAlign = TextAlign.Center
+                        )
                     }
-                )
+                }
             }
-        }
-        Box(
-            contentAlignment = Alignment.Center
-        ) {
-            when {
-                state.isSearching -> CircularProgressIndicator()
-                state.trackableFood.isEmpty() -> {
-                    Text(
-                        text = stringResource(id = R.string.no_results),
-                        style = MaterialTheme.typography.bodyLarge,
-                        textAlign = TextAlign.Center
+        } else {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(state.trackableFood) { trackableFoodUiState ->
+                    TrackableFoodItem(
+                        modifier = Modifier.fillMaxWidth(),
+                        trackableFoodUiState = trackableFoodUiState,
+                        onClick = {
+                            onToggleTrackableFood(trackableFoodUiState.food)
+                        },
+                        onAmountChange = {
+                            onAmountChange(trackableFoodUiState.food, it)
+                        },
+                        onTrack = {
+                            onTrack(trackableFoodUiState.food)
+                        }
                     )
                 }
             }

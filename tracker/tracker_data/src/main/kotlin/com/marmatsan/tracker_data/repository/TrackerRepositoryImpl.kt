@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
+import java.time.temporal.TemporalQuery
 
 class TrackerRepositoryImpl(
     private val dao: TrackerDao,
@@ -20,6 +21,7 @@ class TrackerRepositoryImpl(
 ) : TrackerRepository {
 
     override suspend fun searchFood(
+        query: String,
         page: Int,
         pageSize: Int
     ): Flow<RequestState<List<TrackableFood>>> {
@@ -28,6 +30,7 @@ class TrackerRepositoryImpl(
 
             val remoteProducts = try {
                 val response = api.searchFood(
+                    query = query,
                     page = page,
                     pageSize = pageSize
                 )

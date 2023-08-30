@@ -25,5 +25,6 @@
     <string name="kcal_per_100g">%dkcal / 100g</string>
     <string name="track">Track</string>
     <string name="no_results">No results</string>
+    <string name="error_something_went_wrong">Oops, something went wrong!</string>
 
 </resources>

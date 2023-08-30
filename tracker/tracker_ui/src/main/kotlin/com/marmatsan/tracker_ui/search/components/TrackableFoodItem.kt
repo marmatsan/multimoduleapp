@@ -30,7 +30,9 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
@@ -139,20 +141,6 @@ fun TrackableFoodItem(
             ) {
                 Row {
                     BasicTextField(
-                        value = trackableFoodUiState.amount,
-                        onValueChange = onAmountChange,
-                        keyboardOptions = KeyboardOptions(
-                            imeAction = if (trackableFoodUiState.amount.isNotBlank()) {
-                                ImeAction.Done
-                            } else ImeAction.Default
-                        ),
-                        keyboardActions = KeyboardActions(
-                            onDone = {
-                                onTrack()
-                                defaultKeyboardAction(ImeAction.Done)
-                            }
-                        ),
-                        singleLine = true,
                         modifier = Modifier
                             .border(
                                 shape = RoundedCornerShape(5.dp),
@@ -160,7 +148,25 @@ fun TrackableFoodItem(
                                 color = MaterialTheme.colorScheme.onSurface
                             )
                             .alignBy(LastBaseline)
-                            .padding(spacing.spaceMedium)
+                            .padding(spacing.spaceMedium),
+                        textStyle = TextStyle(
+                            color = MaterialTheme.colorScheme.onBackground
+                        ),
+                        value = trackableFoodUiState.amount,
+                        onValueChange = onAmountChange,
+                        keyboardOptions = KeyboardOptions(
+                            imeAction = if (trackableFoodUiState.amount.isNotBlank()) {
+                                ImeAction.Done
+                            } else ImeAction.Default,
+                            keyboardType = KeyboardType.Number
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onDone = {
+                                onTrack()
+                                defaultKeyboardAction(ImeAction.Done)
+                            }
+                        ),
+                        singleLine = true
                     )
                     Spacer(Modifier.width(spacing.spaceExtraSmall))
                     Text(
@@ -197,7 +203,7 @@ fun TrackableFoodItemPreview() {
                 proteinPer100g = 2481,
                 fatPer100g = 1764
             ),
-            isExpanded = false,
+            isExpanded = true,
             amount = "penatibus"
         ),
         onClick = {},

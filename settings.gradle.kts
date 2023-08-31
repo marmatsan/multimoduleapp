@@ -6,18 +6,20 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
-    includeBuild("./Plugins")
+    includeBuild("./plugins")
 }
 
 plugins {
     id("com.marmatsan.dependencies") apply true
 }
 
-rootProject.name = "MultiLayerApp"
+rootProject.name = "Heal-th"
+
 include(
     Env.Modules.Identifiers.app,
     *arrayOf(
-        Env.Modules.Identifiers.core,
+        Env.Modules.Identifiers.coreData,
+        Env.Modules.Identifiers.coreDomain,
         Env.Modules.Identifiers.coreUi,
     ),
     *arrayOf(
@@ -30,6 +32,8 @@ include(
         Env.Modules.Identifiers.trackerUi
     )
 )
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)

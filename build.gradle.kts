@@ -6,7 +6,7 @@ plugins {
     alias(plugins.plugins.com.android.library) apply false
     alias(plugins.plugins.org.jetbrains.kotlin.android) apply false
     alias(plugins.plugins.com.google.dagger.hilt.android) apply false
-    alias(plugins.plugins.org.jetbrains.kotlin.kapt) apply false
+    alias(plugins.plugins.org.jetbrains.kotlin.plugin.serialization) apply false
 
     /* Custom project plugins */
     id("com.marmatsan.android") apply false
@@ -29,7 +29,8 @@ subprojects {
             apply(plugin = "com.marmatsan.compose")
         }
 
-        Env.Modules.Names.core,
+        Env.Modules.Names.coreData,
+        Env.Modules.Names.coreDomain,
         Env.Modules.Names.onboardingDomain,
         Env.Modules.Names.trackerData,
         Env.Modules.Names.trackerDomain -> {

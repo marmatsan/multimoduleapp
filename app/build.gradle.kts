@@ -12,7 +12,7 @@ android {
         }
     }
 
-    packagingOptions {
+    packaging {
         resources {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
         }
@@ -24,21 +24,27 @@ dependencies {
 
     /* Modules */
     // Core
-    implementation(project(Env.Modules.Identifiers.core))
+    implementation(projects.core.coreData)
+    implementation(projects.core.coreDomain)
+    implementation(projects.core.coreUi)
     // Onboarding
-    implementation(project(Env.Modules.Identifiers.onboardingDomain))
-    implementation(project(Env.Modules.Identifiers.onboardingUi))
+    implementation(projects.onboarding.onboardingDomain)
+    implementation(projects.onboarding.onboardingUi)
     //Tracker
-    implementation(project(Env.Modules.Identifiers.trackerData))
-    implementation(project(Env.Modules.Identifiers.trackerDomain))
-    implementation(project(Env.Modules.Identifiers.trackerUi))
+    implementation(projects.tracker.trackerData)
+    implementation(projects.tracker.trackerDomain)
+    implementation(projects.tracker.trackerUi)
 
     /* Libraries */
     // Core
-    implementation(libs.androidx.core)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
     // Lifecycle
     implementation(libs.bundles.androidx.lifecycle)
     // Activity Compose
     implementation(libs.androidx.activity)
-
+    // Navigation
+    implementation(libs.androidx.navigation)
+    // DataStore
+    implementation(libs.androidx.datastore)
 }

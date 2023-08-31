@@ -29,22 +29,10 @@ class SearchViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun onEvent(
-        event: SearchEvent
-    ) {
+    fun onEvent(event: SearchEvent) {
         when (event) {
             is SearchEvent.OnQueryChange -> {
                 state = state.copy(query = event.query)
-            }
-
-            is SearchEvent.OnAmountForFoodChange -> {
-                state = state.copy(
-                    trackableFood = state.trackableFood.map {
-                        if (it.food == event.food) {
-                            it.copy(amount = filterOutDigits(event.amount))
-                        } else it
-                    }
-                )
             }
 
             is SearchEvent.OnSearch -> {
@@ -53,7 +41,7 @@ class SearchViewModel @Inject constructor(
 
             is SearchEvent.OnToggleTrackableFood -> {
                 state = state.copy(
-                    trackableFood = state.trackableFood.map {
+                    trackableFoods = state.trackableFoods.map {
                         if (it.food == event.food) {
                             it.copy(isExpanded = !it.isExpanded)
                         } else it
@@ -61,14 +49,24 @@ class SearchViewModel @Inject constructor(
                 )
             }
 
-            is SearchEvent.OnSearchFocusChange -> {
+            is SearchEvent.OnAmountForFoodChange -> {
                 state = state.copy(
-                    isHintVisible = !event.isFocused && state.query.isBlank()
+                    trackableFoods = state.trackableFoods.map {
+                        if (it.food == event.food) {
+                            it.copy(amount = filterOutDigits(event.amount))
+                        } else it
+                    }
                 )
             }
 
             is SearchEvent.OnTrackFoodClick -> {
                 trackFood(event)
+            }
+
+            is SearchEvent.OnSearchFocusChange -> {
+                state = state.copy(
+                    isHintVisible = !event.isFocused && state.query.isBlank()
+                )
             }
         }
     }
@@ -77,7 +75,7 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             state = state.copy(
                 isSearching = true,
-                trackableFood = emptyList()
+                trackableFoods = emptyList()
             )
             trackerUseCases.searchFood(state.query).collect { request ->
                 when (request) {
@@ -98,7 +96,7 @@ class SearchViewModel @Inject constructor(
                     is RequestState.Success -> {
                         state = state.copy(
                             query = "",
-                            trackableFood = request.data?.map {
+                            trackableFoods = request.data?.map {
                                 TrackableFoodUiState(it)
                             } ?: emptyList(),
                             isSearching = false
@@ -109,11 +107,9 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    private fun trackFood(
-        event: SearchEvent.OnTrackFoodClick
-    ) {
+    private fun trackFood(event: SearchEvent.OnTrackFoodClick) {
         viewModelScope.launch {
-            val uiState = state.trackableFood.find { it.food == event.food }
+            val uiState = state.trackableFoods.find { it.food == event.food }
             trackerUseCases.trackFood(
                 food = uiState?.food ?: return@launch,
                 amount = uiState.amount.toIntOrNull() ?: return@launch,

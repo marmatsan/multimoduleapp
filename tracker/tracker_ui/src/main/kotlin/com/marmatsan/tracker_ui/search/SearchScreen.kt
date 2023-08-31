@@ -83,12 +83,12 @@ fun SearchScreen(
             viewModel.onEvent(
                 SearchEvent.OnTrackFoodClick(
                     food = it,
-                    meal = when (mealName) {
+                    meal = when (mealName) { // TODO: Change logic
                         "Breakfast" -> Meal.Breakfast
                         "Lunch" -> Meal.Lunch
                         "Dinner" -> Meal.Dinner
                         "Snack" -> Meal.Snack
-                        else -> Meal.Breakfast // TODO: Change
+                        else -> Meal.Breakfast
                     },
                     date = LocalDate.of(year, month, dayOfMonth)
                 )
@@ -138,7 +138,7 @@ fun SearchScreenContent(
                     end = spacing.spaceSmall
                 ),
                 text = state.query,
-                shouldShowHint = state.isHintVisible,
+                hintVisible = state.isHintVisible,
                 onValueChange = {
                     onValueChange(it)
                 },
@@ -151,14 +151,14 @@ fun SearchScreenContent(
             )
         }
         Spacer(Modifier.height(spacing.spaceMedium))
-        if (state.isSearching || state.trackableFood.isEmpty()) {
+        if (state.isSearching || state.trackableFoods.isEmpty()) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 when {
                     state.isSearching -> CircularProgressIndicator()
-                    state.trackableFood.isEmpty() -> {
+                    state.trackableFoods.isEmpty() -> {
                         Text(
                             text = stringResource(id = R.string.no_results),
                             style = MaterialTheme.typography.bodyLarge,
@@ -171,7 +171,7 @@ fun SearchScreenContent(
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
             ) {
-                items(state.trackableFood) { trackableFoodUiState ->
+                items(state.trackableFoods) { trackableFoodUiState ->
                     TrackableFoodItem(
                         modifier = Modifier.fillMaxWidth(),
                         trackableFoodUiState = trackableFoodUiState,

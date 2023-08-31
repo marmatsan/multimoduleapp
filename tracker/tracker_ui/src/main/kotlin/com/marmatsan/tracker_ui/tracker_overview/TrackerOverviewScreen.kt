@@ -59,13 +59,13 @@ fun TrackerOverviewScreen(
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun TrackerOverviewScreenContent(
-    modifier: Modifier,
     state: TrackerOverviewState,
     onPreviousDayClick: () -> Unit,
     onNextDayClick: () -> Unit,
     onToggleClick: (MealItem) -> Unit,
     onDeleteClick: (TrackedFood) -> Unit,
-    onAddFood: (String) -> Unit
+    onAddFood: (String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current

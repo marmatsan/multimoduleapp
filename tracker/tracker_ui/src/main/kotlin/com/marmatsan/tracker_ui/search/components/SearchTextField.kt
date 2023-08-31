@@ -38,7 +38,7 @@ fun SearchTextField(
     onSearch: () -> Unit,
     onFocusChanged: (FocusState) -> Unit,
     modifier: Modifier = Modifier,
-    shouldShowHint: Boolean = false,
+    hintVisible: Boolean = false,
     hint: String = stringResource(id = R.string.search),
 ) {
     val spacing = LocalSpacing.current
@@ -71,7 +71,7 @@ fun SearchTextField(
                 .padding(all = spacing.spaceMedium)
                 .onFocusChanged { onFocusChanged(it) }
         )
-        if (shouldShowHint) {
+        if (hintVisible) {
             Text(
                 text = hint,
                 color = MaterialTheme.colorScheme.onSecondary,
@@ -99,9 +99,10 @@ fun SearchTextField(
 @Composable
 fun SearchTextFieldPreview() {
     SearchTextField(
-        text = "Rice",
+        text = "",
         onValueChange = { },
         onSearch = { },
-        onFocusChanged = { }
+        onFocusChanged = { },
+        hintVisible = true
     )
 }
